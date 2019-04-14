@@ -1,0 +1,35 @@
+# Emacs
+*~
+\#*\#
+*.elc
+auto-save-list
+.\#*
+*~
+\#*\#
+elpa/
+eshell/
+tramp
+places
+
+## projectile
+projectile-bookmarks.eld
+network-security.data
+
+custom.el
+
+## restclient
+url/
+request/
+
+## others
+.emacs.desktop
+.mc-lists.el
+abbrev_defs
+bookmarks
+srecode-map.el
+todo/
+transient/
+
+## lsp
+.cache/
+.lsp-session-v1

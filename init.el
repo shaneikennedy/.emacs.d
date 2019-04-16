@@ -118,7 +118,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
+    (yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -327,6 +327,11 @@
 ;; Better imenu
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
+
+;;; YAML mode
+(use-package yaml-mode
+  :ensure t)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;;; Editor
 (use-package editorconfig

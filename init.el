@@ -96,17 +96,25 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Open new frames always maximized
 (defun set-frame-maximized (&optional frame)
+  "Initialize FRAME to take full window size."
   (set-frame-parameter frame 'fullscreen 'maximized))
 
 (add-hook 'window-setup-hook 'set-frame-maximized)
 (add-hook 'after-make-frame-functions 'set-frame-maximized)
+(transparency 92)
 
-(use-package monokai-theme
-  :ensure t
-  :init
-  (load-theme 'monokai t))
+;; (use-package monokai-theme
+;;   :ensure t
+;;   :init
+;;   (load-theme 'monokai t))
+(add-to-list 'load-path "~/.emacs.d/themes/")
+(load "darkplus-theme")
+
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode))
+(setq doom-modeline-buffer-file-name-style 'relative-to-project)
 
 (set-frame-font "Menlo-12" t t)
 (setq inhibit-startup-screen 1)
@@ -116,15 +124,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" default)))
  '(package-selected-packages
    (quote
-    (yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
+    (doom-modeline yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:background "#1e1e1e" :foreground "#d4d4d4")))))
 
 ;;; Editor config
 ;;;
@@ -244,8 +255,8 @@
   (exec-path-from-shell-initialize))
 
 (defun transparency (value)
-   "Sets the transparency of the frame window. 0=transparent/100=opaque"
-   (interactive "nTransparency Value 0 - 100 opaque:")
+   "Set the transparency of the frame window given a VALUE, 0=transparent/100=opaque."
+   (interactive "nTransparency value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
 

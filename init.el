@@ -404,3 +404,35 @@
   :config
   (setq lsp-ui-sideline-enable nil))
 
+
+;;; Custom functions
+(defun sk/eslint-run-autofix()
+  "Run eslint autofix on file."
+  (interactive)
+  (start-process-shell-command "eslint fix"
+			       "npx"
+			       (concat
+				(projectile-project-root)
+				"node_modules/eslint/bin/eslint.js --fix " (buffer-file-name))))
+
+
+(defun sk/vue-base()
+  "Snippet for base vue template."
+  (interactive)
+  (insert "<template>\n</template>
+	    \n<script>\n export default {};\n</script>
+	    \n\n<style scoped>\n</style>"))
+
+(defun copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
+
+
+(provide 'init)
+;;; init.el ends here

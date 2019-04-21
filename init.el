@@ -330,10 +330,17 @@
   :mode "\\.vue\\'"
   :config
   (setq mmm-submode-decoration-level 0))
+(add-hook 'vue-mode-hook
+	  (lambda()
+	    (add-hook 'before-save-hook 'sk/eslint-run-autofix nil 'make-it-local)))
+
 
 (use-package js2-mode
   :ensure t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook
+	  (lambda()
+	    (add-hook 'before-save-hook 'sk/eslint-run-autofix nil 'make-it-local)))
 
 ;; Better imenu
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
@@ -366,6 +373,7 @@
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
 (defun my/use-eslint-from-node-modules ()
+  "Check for local eslintrc."
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
                 "node_modules"))

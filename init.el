@@ -13,6 +13,7 @@
 
 (require 'use-package)
 
+;;; Custom functions
 (defun sk/eslint-run-autofix()
   "Run eslint autofix on file."
   (interactive)
@@ -61,6 +62,8 @@
 		   (evil-leader/set-key
 		    "<SPC>" 'ace-window
 
+		    ;; code commands
+		    "c d" 'lsp-find-definition
 		    ;; projectile commands
 		    "p r" 'projectile-ripgrep
 		    "p f" 'projectile-find-file
@@ -142,6 +145,7 @@
 ;;   (load-theme 'monokai t))
 (add-to-list 'load-path "~/.emacs.d/themes/")
 (load "darkplus-theme")
+;; (load "dracula-theme")
 
 (use-package doom-modeline
       :ensure t
@@ -161,7 +165,7 @@
     ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" default)))
  '(package-selected-packages
    (quote
-    (doom-modeline yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
+    (ms-python lsp-python-ms lsp-common lsp-python doom-modeline yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -364,6 +368,7 @@
 
 (use-package js2-mode
   :ensure t)
+(add-hook 'js2-mode-hook 'lsp)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook
 	  (lambda()
@@ -429,7 +434,6 @@
   (add-hook 'prog-mode-hook 'lsp)
   (setq lsp-prefer-flymake nil))
 
-
 (use-package company-lsp
   :commands company-lsp)
 
@@ -439,8 +443,6 @@
   :config
   (setq lsp-ui-sideline-enable nil))
 
-
-;;; Custom functions
 
 (provide 'init)
 ;;; init.el ends here

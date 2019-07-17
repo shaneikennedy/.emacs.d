@@ -144,23 +144,6 @@
 (add-hook 'after-make-frame-functions 'set-frame-maximized)
 (transparency 92)
 
-;; (use-package monokai-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'monokai t))
-(add-to-list 'load-path "~/.emacs.d/themes/")
-(load "darkplus-theme")
-;; (load "dracula-theme")
-
-(use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-mode))
-(setq doom-modeline-buffer-file-name-style 'relative-to-project)
-
-(set-frame-font "Menlo-12" t t)
-(setq inhibit-startup-screen 1)
-(setq max-specpdl-size 5)  ; default is 1000, reduce the backtrace level
-(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -170,13 +153,32 @@
     ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" default)))
  '(package-selected-packages
    (quote
-    (ms-python lsp-python-ms lsp-common lsp-python doom-modeline yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader))))
+    (spaceline ms-python lsp-python-ms lsp-common lsp-python doom-modeline yaml-mode lsp-ui company-lsp company flycheck editorconfig js2-mode vue-mode auto-virtualenv pyvenv py-isort diff-hl projectile-ripgrep projectile exec-path-from-shell dockerfile-mode counsel ace-window super-save ivy drag-stuff smartparens monokai-theme use-package evil-surround evil-org evil-magit evil-leader)))
+ '(zoom-size (quote (0.618 . 0.618)))
+;; (use-package monokai-theme
+;;   :ensure t
+;;   :init
+;;   (load-theme 'monokai t))
+(add-to-list 'load-path "~/.emacs.d/themes/")
+;; (load "darkplus-theme")
+;; (load "dracula-theme")
+(load "badwolf-theme")
+
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode))
+(setq doom-modeline-buffer-file-name-style 'relative-to-project)
+
+(set-frame-font "Menlo-12" t t)
+(setq inhibit-startup-screen 1)
+(setq max-specpdl-size 5)  ; default is 1000, reduce the backtrace level
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 89)) (:background "#1e1e1e" :foreground "#d4d4d4")))))
+ '(default ((t (:inherit nil :foreground "#f8f6f2" :background "#1c1b1a")))))
 
 ;;; Editor config
 ;;;
@@ -470,3 +472,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+

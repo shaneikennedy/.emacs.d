@@ -465,9 +465,7 @@
 
 (use-package lsp-ui
   :ensure t
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-sideline-enable nil))
+  :commands lsp-ui-mode)
 
 
 (provide 'init)

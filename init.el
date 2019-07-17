@@ -265,6 +265,25 @@
 ;; Don't break lines for me, please
 (setq-default truncate-lines t)
 
+;; ZOOM
+(use-package zoom
+  :ensure t)
+
+(custom-set-variables
+ '(zoom-mode t))
+
+(custom-set-variables
+ '(zoom-size '(0.618 . 0.618)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (zoom golden-ratio yaml-mode vue-mode use-package super-save spaceline smartparens py-isort projectile-ripgrep lsp-ui js2-mode flycheck exec-path-from-shell evil-surround evil-org evil-magit evil-leader editorconfig drag-stuff doom-modeline dockerfile-mode diff-hl counsel company-lsp auto-virtualenv ace-window))))
+
 
 ;;; Dockerfile Mode
 (use-package dockerfile-mode

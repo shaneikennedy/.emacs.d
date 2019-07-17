@@ -24,6 +24,11 @@
 				"node_modules/eslint/bin/eslint.js --fix " (buffer-file-name))))
 
 
+(defun sk/django-test-string()
+  "Insert django test string in buffer"
+  (interactive)
+  (insert "export DJANGO_SETTINGS_MODULE=\"kog.config.settings.testing\" && python manage.py test"))
+
 (defun sk/vue-base()
   "Snippet for base vue template."
   (interactive)

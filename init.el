@@ -72,6 +72,7 @@
 		    ;; projectile commands
 		    "p r" 'projectile-ripgrep
 		    "p f" 'projectile-find-file
+		    "p d" 'projectile-find-dir
 		    "p p" 'projectile-switch-project
 
 		    ;; magit shortcuts
@@ -162,7 +163,8 @@
 (add-to-list 'load-path "~/.emacs.d/themes/")
 ;; (load "darkplus-theme")
 ;; (load "dracula-theme")
-(load "badwolf-theme")
+;; (load "badwolf-theme")
+(load "spacemacs-dark-theme")
 
 (use-package doom-modeline
       :ensure t
@@ -178,7 +180,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :foreground "#f8f6f2" :background "#1c1b1a")))))
+ '(default ((((class color) (min-colors 89)) (:background "#292b2e" :foreground "#b2b2b2")))))
 
 ;;; Editor config
 ;;;
@@ -272,19 +274,19 @@
   :ensure t)
 
 (custom-set-variables
- '(zoom-mode t))
-
-(custom-set-variables
- '(zoom-size '(0.618 . 0.618)))
-
-(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (zoom golden-ratio yaml-mode vue-mode use-package super-save spaceline smartparens py-isort projectile-ripgrep lsp-ui js2-mode flycheck exec-path-from-shell evil-surround evil-org evil-magit evil-leader editorconfig drag-stuff doom-modeline dockerfile-mode diff-hl counsel company-lsp auto-virtualenv ace-window))))
+    (company-ghc hindent flycheck-haskell haskell-mode django-test-runner django-test zoom golden-ratio yaml-mode vue-mode use-package super-save spaceline smartparens py-isort projectile-ripgrep lsp-ui js2-mode flycheck exec-path-from-shell evil-surround evil-org evil-magit evil-leader editorconfig drag-stuff doom-modeline dockerfile-mode diff-hl counsel company-lsp auto-virtualenv ace-window)))
+ '(zoom-mode t nil (zoom))
+ '(zoom-size (quote (0.618 . 0.618))))
+
+
+
+
 
 
 ;;; Dockerfile Mode
@@ -324,6 +326,7 @@
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy))
 
@@ -348,6 +351,12 @@
     (add-hook 'dired-mode-hook 'diff-hl-dired-mode-unless-remote))
 
 ;;; Python
+;; (require 'django-test.el)
+;; (use-package django-test-runner
+;;   :load-path "vendor/django-test"
+;;   :ensure t)
+(add-to-list 'load-path "~/.emacs.d/vendor/django-test/")
+(load "django-test.el")
 
 (setq create-lockfiles nil)
 
@@ -359,8 +368,8 @@
   (require 'python)
   :bind (:map python-mode-map
           ("C-<f9>" . mw/python--add-pudb-breakpoint)
+          ("<f10>" . django-test-runner)
           ("C-M-<f9>" . mw/python--remove-breakpoints)
-          ("<f7>" . bc/test-django-function)
           ("C-M-f" . sp-forward-sexp)
           ("C-M-b" . sp-backward-sexp)
           ("C-c C-t o" . py-isort-buffer))
@@ -466,6 +475,25 @@
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
+
+
+;; Haskell config
+(use-package haskell-mode
+  :ensure t)
+
+(use-package hindent
+  :ensure t)
+(add-hook 'haskell-mode-hook #'hindent-mode)
+
+(use-package flycheck-haskell
+  :ensure t)
+(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+
+(use-package company-ghc
+  :ensure t)
+
+(add-hook 'haskell-mode-hook 'company-mode)
+(add-to-list 'company-backends 'company-ghc)
 
 
 (provide 'init)

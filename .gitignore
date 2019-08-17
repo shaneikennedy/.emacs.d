@@ -29,6 +29,7 @@ bookmarks
 srecode-map.el
 todo/
 transient/
+vendor/
 
 ## lsp
 .cache/

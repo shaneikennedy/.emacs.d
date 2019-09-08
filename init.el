@@ -69,30 +69,36 @@
 
 		    ;; code commands
 		    "c d" 'lsp-find-definition
+		    ";" 'comment-line
+
 		    ;; projectile commands
 		    "p r" 'projectile-ripgrep
 		    "p f" 'projectile-find-file
-		    "p d" 'projectile-find-dir
 		    "p p" 'projectile-switch-project
 
 		    ;; magit shortcuts
 		    "g s" 'magit-status
 		    "g c" 'magit-checkout
+		    "g b" 'magit-blame
 
 		    ;; file operations
 		    "f w" 'save-buffer
 		    "f f" 'ido-find-file
 		    "f s" 'swiper
-		    ";" 'comment-line
+		    "f c" 'copy-file-name-to-clipboard
+
+		    ;; buffer operations
 		    "b" 'ido-switch-buffer
-		    "e" 'er/expand-region
 		    "k" 'kill-buffer
 		    "K" 'kill-this-buffer
+
+		    ;; shell
 		    "T" 'shell
 
 		    ;; window commands
 		    "w d" 'delete-window
 		    "w n" 'split-window-horizontally
+		    "w 1" 'delete-other-windows
 
 		    ))
 		    (use-package evil-magit
@@ -280,7 +286,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-ghc hindent flycheck-haskell haskell-mode django-test-runner django-test zoom golden-ratio yaml-mode vue-mode use-package super-save spaceline smartparens py-isort projectile-ripgrep lsp-ui js2-mode flycheck exec-path-from-shell evil-surround evil-org evil-magit evil-leader editorconfig drag-stuff doom-modeline dockerfile-mode diff-hl counsel company-lsp auto-virtualenv ace-window)))
+    (csv-mode company-ghc hindent flycheck-haskell haskell-mode django-test-runner django-test zoom golden-ratio yaml-mode vue-mode use-package super-save spaceline smartparens py-isort projectile-ripgrep lsp-ui js2-mode flycheck exec-path-from-shell evil-surround evil-org evil-magit evil-leader editorconfig drag-stuff doom-modeline dockerfile-mode diff-hl counsel company-lsp auto-virtualenv ace-window)))
  '(zoom-mode t nil (zoom))
  '(zoom-size (quote (0.618 . 0.618))))
 

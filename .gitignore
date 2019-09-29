@@ -12,6 +12,7 @@ tramp
 places
 
 ## projectile
+projectile.cache
 projectile-bookmarks.eld
 network-security.data
 
@@ -30,7 +31,10 @@ srecode-map.el
 todo/
 transient/
 vendor/
+recentf
+smex-items
 
 ## lsp
 .cache/
 .lsp-session-v1
+

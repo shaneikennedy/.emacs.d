@@ -78,14 +78,9 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-tomorrow-night)
+  (load-theme 'doom-vibrant)
   (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
-
-  ;; Docstrings should be a bit lighter, since they're important.
-  (custom-theme-set-faces
-  'doom-tomorrow-night
-  '(font-lock-doc-face ((t (:foreground "#D8D2C1"))))))
+  (doom-themes-org-config))
 
 ;; Ensure that items in the PATH are made available to Emacs. This should
 ;; probably just come with the main distribution.
@@ -235,9 +230,20 @@
 (use-package company-lsp
   :commands company-lsp)
 
-
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
 ;; Magit is one of the best pieces of OSS I have ever used. It is truly esssential.
+
+(defun maybe-unset-buffer-modified (&optional _)
+  "Clear modified bit on all unmodified buffers."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and buffer-file-name (buffer-modified-p) (current-buffer-matches-file-p))
+        (set-buffer-modified-p nil)))))
+
 
 (use-package magit
   :bind (("C-c g" . magit-status))
@@ -505,7 +511,7 @@
 		    "f c" 'copy-file-name-to-clipboard
 
 		    ;; buffer operations
-		    "b" 'ido-switch-buffer
+		    "b" 'ivy-switch-buffer
 		    "k" 'kill-buffer
 		    "K" 'kill-this-buffer
 
@@ -556,7 +562,7 @@
   :after evil
   :ensure t
   :config
-  (evil-collection-init 'deadgrep))
+  (evil-collection-init))
 
 (transparency 92)
 

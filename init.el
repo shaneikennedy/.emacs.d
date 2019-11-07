@@ -82,6 +82,7 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
+
 ;; Ensure that items in the PATH are made available to Emacs. This should
 ;; probably just come with the main distribution.
 
@@ -224,7 +225,6 @@
   :ensure t
   :config
   (require 'lsp-clients)
-  (add-hook 'prog-mode-hook 'lsp)
   (setq lsp-prefer-flymake nil))
 
 (use-package company-lsp
@@ -263,12 +263,29 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
+(use-package diff-hl
+  :ensure t
+  :demand t
+  :config
+    (diff-hl-flydiff-mode +1)
+    (global-diff-hl-mode +1)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    (add-hook 'dired-mode-hook 'diff-hl-dired-mode-unless-remote))
 
 ;; Haskell and Elisp are made a lot easier when delimiters are nicely color-coded.
 
 (use-package rainbow-delimiters
-  :disabled
+  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package smartparens
+  :ensure t
+  :diminish smartparens-mode
+  :init
+  (smartparens-global-mode t)
+  (smartparens-strict-mode t)
+  (show-smartparens-global-mode t)
+  (require 'smartparens-config))
 
 ;; multiple-cursors is better than cua-selection-mode.
 ;; TODO: learn ace-mc
@@ -276,20 +293,13 @@
 (use-package multiple-cursors
   :bind (("C-c M" . mc/edit-lines)))
 
-;; Common Haskell snippets. These take a while to load, so no need to block on startup.
-
-(use-package haskell-snippets
-  :defer yasnippet)
-
 ;; The beauty of undo-tree is that it means that, once you've typed something into a buffer,
 ;; you'll always be able to get it back. At least in theory. undo-tree has long-standing data
 ;; loss bugs that are unlikely to be fixed. But no other package provodes a comparable experience.
 
 (use-package undo-tree
-  :bind (("C-c _" . undo-tree-visualize))
   :config
   (global-undo-tree-mode +1)
-  (unbind-key "M-_" undo-tree-map)
   :diminish)
 
 
@@ -375,6 +385,7 @@
 (use-package company-ghc
   :ensure t)
 
+(setq lsp-haskell-process-path-hie "hie-wrapper")
 (add-hook 'haskell-mode-hook 'company-mode)
 (add-to-list 'company-backends 'company-ghc)
 
@@ -432,6 +443,7 @@
   mac-mouse-wheel-smooth-scroll nil      ; no smooth scrolling
   mac-drawing-use-gcd t                  ; and you can do it on other frames
   mark-even-if-inactive nil              ; prevent really unintuitive undo behavior
+  electric-pair-mode 1                   ; match parens
   )
 
 ;; dired whines at you on macOS unless you do this.
@@ -537,6 +549,12 @@
 		    :ensure t)
 		    ;; boot evil by default
 
+                    (use-package evil-collection
+                    :after evil
+                    :ensure t
+                    :config
+                    (evil-collection-init))
+
 		    (evil-mode 1)))
   :config
   (progn
@@ -556,13 +574,7 @@
 			(fundamental-mode . emacs)))
       (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
     ))
-(evil-mode 1)
 
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
 
 (transparency 92)
 
@@ -651,22 +663,17 @@
           ("C-M-<f9>" . mw/python--remove-breakpoints)
           ("C-M-f" . sp-forward-sexp)
           ("C-M-b" . sp-backward-sexp)
-          ("C-c C-t o" . py-isort-buffer))
+          ("<f2>" . py-isort-buffer))
   :config
-  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))
+  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv)
+  (add-hook 'python-mode-hook #'lsp))
+
 
 (use-package pyvenv
   :ensure t)
 
 (use-package auto-virtualenv
   :ensure t)
-
-(use-package dired-x
-  :config
-  (setq-default dired-omit-files-p t)
-  (setq dired-omit-files
-    (concat dired-omit-files "$\\|^__pycache__$\\|^\\.pyc$\\|^\\.DS_Store$"))
-  )
 
 
 ;;; Javascript
@@ -682,7 +689,6 @@
 
 (use-package js2-mode
   :ensure t)
-(add-hook 'js2-mode-hook 'lsp)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; (add-hook 'js2-mode-hook
 ;; 	  (lambda()

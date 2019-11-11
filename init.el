@@ -646,8 +646,8 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
-(add-to-list 'load-path "~/.emacs.d/vendor/django-test/")
-(load "django-test.el")
+(add-to-list 'load-path "~/.emacs.d/vendor/django-test-runner/")
+(load "django-test-runner.el")
 
 (setq create-lockfiles nil)
 

@@ -41,9 +41,6 @@
 
 (prefer-coding-system 'utf-8)
 
-(ignore-errors
-  (set-frame-font "Iosevka-14"))
-
 ;; Any Customize-based settings should live in custom.el, not here.
 
 (setq custom-file "~/.emacs.d/custom.el")
@@ -76,11 +73,16 @@
 
 ;; The Doom Emacs themes look really good.
 
-(use-package doom-themes
+;; (use-package doom-themes
+;;   :config
+;;   (load-theme 'doom-vibrant)
+;;   (doom-themes-visual-bell-config)
+;;   (doom-themes-org-config))
+
+(use-package kaolin-themes
+  :ensure t
   :config
-  (load-theme 'doom-vibrant)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
+  (load-theme 'kaolin-aurora t))
 
 
 ;; Ensure that items in the PATH are made available to Emacs. This should
@@ -287,11 +289,6 @@
   (show-smartparens-global-mode t)
   (require 'smartparens-config))
 
-;; multiple-cursors is better than cua-selection-mode.
-;; TODO: learn ace-mc
-
-(use-package multiple-cursors
-  :bind (("C-c M" . mc/edit-lines)))
 
 ;; The beauty of undo-tree is that it means that, once you've typed something into a buffer,
 ;; you'll always be able to get it back. At least in theory. undo-tree has long-standing data

@@ -315,12 +315,6 @@
 (use-package haskell-mode
   :config
 
-  (defun my-haskell-mode-hook ()
-    "Make sure the compile command is right."
-    (setq-local compile-command "stack build --fast"))
-
-  (unbind-key "C-c C-s" haskell-mode-map)
-
   ;; I don't go overboard with the symbols but they can be nice.
   (setq haskell-font-lock-symbols 't
         haskell-font-lock-symbols-alist
@@ -364,30 +358,25 @@
         "-XStrictData"
         "-XTypeApplications"))
 
-  :mode ("\\.hs$" . haskell-mode)
-  :hook (haskell-mode . my-haskell-mode-hook)
-
-  :bind (:map haskell-mode-map
-         ("C-c a c" . haskell-cabal-visit-file)
-	 ("C-c a b" . haskell-mode-stylish-buffer)
-         ("C-c a i" . haskell-navigate-imports)
-         ("C-c a a" . haskell-mode-toggle-scc-at-point)
-         ("C-c a w" . stack-watch)))
+  :mode ("\\.hs$" . haskell-mode))
 
 (use-package hindent
   :ensure t)
-(add-hook 'haskell-mode-hook #'hindent-mode)
 
 (use-package flycheck-haskell
   :ensure t)
-(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
 
 (use-package company-ghc
   :ensure t)
 
+(use-package lsp-haskell
+  :ensure t)
+
 (setq lsp-haskell-process-path-hie "hie-wrapper")
-(add-hook 'haskell-mode-hook 'company-mode)
 (add-to-list 'company-backends 'company-ghc)
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+(add-hook 'haskell-mode-hook #'hindent-mode)
 
 (defun open-init-file ()
   "Open this very file."

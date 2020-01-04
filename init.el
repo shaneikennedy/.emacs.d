@@ -227,7 +227,9 @@
   :ensure t
   :config
   (require 'lsp-clients)
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil
+        lsp-enable-snippet nil))
+
 
 (use-package company-lsp
   :commands company-lsp)
@@ -474,6 +476,7 @@
 (use-package evil
   :ensure t
   :init
+  (setq evil-want-keybinding nil)
   (progn
     (setq evil-default-cursor t)
     (use-package evil-leader
@@ -481,7 +484,6 @@
 		 :init (global-evil-leader-mode)
 		 (evil-leader/set-leader "<SPC>")
                  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-                 (setq evil-want-keybinding nil)
 		 :config
 		 (progn
 		   (setq evil-leader/in-all-states t)

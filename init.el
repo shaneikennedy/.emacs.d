@@ -1,6 +1,3 @@
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with <open> and enter text in its buffer.
-
 ;; Package-initialization preamble, adding melpa and melpa-stable.
 
 (require 'package)
@@ -512,6 +509,7 @@
 
 		    ;; code commands
 		    "c d" 'lsp-find-definition
+                    "c i" 'counsel-imenu
 		    ";" 'comment-line
 
 		    ;; projectile commands

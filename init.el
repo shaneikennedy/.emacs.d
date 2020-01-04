@@ -472,6 +472,26 @@
    (interactive "nTransparency value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo
+        dashboard-center-content t
+        dashboard-banner-logo-title "Be careful"
+        ;; dashboard-items nil
+        dashboard-items '((recents  . 5)
+                        (projects . 5))
+        dashboard-set-footer nil))
+
+(use-package all-the-icons
+  :ensure t)
+
+(use-package page-break-lines
+  :ensure t
+  :config
+  (page-break-lines-mode))
+
 ;; Evil configuration
 (use-package evil
   :ensure t
@@ -557,6 +577,7 @@
 
     ;; modes to map to diifferent default states
     (dolist (mode-map '((comint-mode . emacs)
+                        (dashboard-mode . emacs)
 			(term-mode . emacs)
 			(help-mode . emacs)
 			(fundamental-mode . emacs)))

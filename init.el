@@ -57,13 +57,6 @@
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
 
-(defun sk/vue-base()
-  "Snippet for base vue template."
-  (interactive)
-  (insert "<template>\n</template>
-	    \n<script>\n export default {};\n</script>
-	    \n\n<style scoped>\n</style>"))
-
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)

@@ -14,5 +14,12 @@
   :ensure t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+(defun sk/vue-base()
+  "Snippet for base vue template."
+  (interactive)
+  (insert "<template>\n</template>
+	    \n<script>\n export default {};\n</script>
+	    \n\n<style scoped>\n</style>"))
+
 (provide 'my-javascript)
 ;;; my-javascript.el ends here

@@ -33,6 +33,7 @@
 (require 'my-python)
 (require 'my-javascript)
 (require 'my-haskell)
+(require 'my-docker)
 
 
 (setq
@@ -70,15 +71,6 @@
     (when filename
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
-
-;;; Dockerfile Mode
-(use-package dockerfile-mode
-  :ensure t)
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-
-(use-package docker
-  :ensure t
-  :bind ("C-c d" . docker))
 
 (provide 'init)
 ;;; init.el ends here

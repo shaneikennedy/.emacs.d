@@ -677,9 +677,13 @@
           ("C-M-b" . sp-backward-sexp)
           ("<f2>" . py-isort-buffer))
   :config
-  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv)
-  (add-hook 'python-mode-hook #'lsp))
+  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))
 
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))  ; or lsp-deferred
 
 (use-package pyvenv
   :ensure t)

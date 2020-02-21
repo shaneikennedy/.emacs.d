@@ -355,5 +355,8 @@
   :config
   (diminish 'eldoc-mode))
 
+;; Always prefer newer files.
+(setq load-prefer-newer t)
+
 (provide 'my-gui)
 ;;; my-gui.el ends here

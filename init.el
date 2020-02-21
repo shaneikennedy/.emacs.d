@@ -44,11 +44,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-;; Always prefer newer files.
-(setq load-prefer-newer t)
-
 ;; I do all of my writing in either org-mode or markdown-mode.
-
 (use-package markdown-mode
   :mode ("\\.md$" . gfm-mode)
   :config

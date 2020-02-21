@@ -634,6 +634,11 @@
 ;;; Dockerfile Mode
 (use-package dockerfile-mode
   :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
 
 ;;; OS specific config
 (defconst *is-a-mac* (eq system-type 'darwin))

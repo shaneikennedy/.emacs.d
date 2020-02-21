@@ -689,17 +689,10 @@
   :mode "\\.vue\\'"
   :config
   (setq mmm-submode-decoration-level 0))
-;; (add-hook 'vue-mode-hook
-;; 	  (lambda()
-;; 	    (add-hook 'before-save-hook 'sk/eslint-run-autofix nil 'make-it-local)))
-
 
 (use-package js2-mode
   :ensure t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;; (add-hook 'js2-mode-hook
-;; 	  (lambda()
-;; 	    (add-hook 'before-save-hook 'sk/eslint-run-autofix nil 'make-it-local)))
 
 ;;; Editor
 (use-package editorconfig

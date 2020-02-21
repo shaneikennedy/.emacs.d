@@ -1,5 +1,11 @@
-;; Package-initialization preamble, adding melpa and melpa-stable.
+;;; init.el -- My Emacs configuration
 
+
+;;; Commentary:
+;; As of right now, common configurations are in ./modules
+;; The code begins with setting up Emacs with use package and other necessary
+;; initialization settings. It then loads my custom modules, and ends with misc
+;; things that I can't find a good enough name to group together as
 (require 'package)
 
 (defmacro append-to-list (target suffix)
@@ -25,7 +31,15 @@
 (defvar use-package-enable-imenu-support t)
 
 (require 'use-package)
+(setq
+ use-package-always-ensure t
+ use-package-verbose t)
 
+;; Any Customize-based settings should live in custom.el, not here.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
+;; Custom modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)
 (require 'my-evil)
@@ -35,15 +49,7 @@
 (require 'my-haskell)
 (require 'my-docker)
 
-
-(setq
- use-package-always-ensure t
- use-package-verbose t)
-
-;; Any Customize-based settings should live in custom.el, not here.
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
-
+;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.
 (use-package markdown-mode
   :mode ("\\.md$" . gfm-mode)

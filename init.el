@@ -28,6 +28,8 @@
 
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-python)
+(require 'my-javascript)
+
 
 (setq
  use-package-always-ensure t
@@ -662,17 +664,6 @@
 
 
 (setq create-lockfiles nil)
-
-;;; Javascript
-(use-package vue-mode
-  :ensure t
-  :mode "\\.vue\\'"
-  :config
-  (setq mmm-submode-decoration-level 0))
-
-(use-package js2-mode
-  :ensure t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;; Editor
 (use-package editorconfig

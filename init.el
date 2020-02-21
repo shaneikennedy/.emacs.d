@@ -6,6 +6,9 @@
 ;; The code begins with setting up Emacs with use package and other necessary
 ;; initialization settings. It then loads my custom modules, and ends with misc
 ;; things that I can't find a good enough name to group together as
+
+
+;;; Code:
 (require 'package)
 
 (defmacro append-to-list (target suffix)
@@ -21,7 +24,6 @@
 
 ;; Ensure use-package is present. From here on out, all packages are loaded
 ;; with use-package.
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -29,7 +31,6 @@
 ;; Allow navigation between use-package stanzas with imenu.
 ;; This has to be set before loading use-package.
 (defvar use-package-enable-imenu-support t)
-
 (require 'use-package)
 (setq
  use-package-always-ensure t

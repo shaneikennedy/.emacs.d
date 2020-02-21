@@ -476,7 +476,6 @@
   (setq dashboard-startup-banner 'logo
         dashboard-center-content t
         dashboard-banner-logo-title "Be careful"
-        ;; dashboard-items nil
         dashboard-items '((recents  . 5)
                         (projects . 5))
         dashboard-set-footer nil))

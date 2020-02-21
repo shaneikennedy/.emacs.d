@@ -26,6 +26,9 @@
 
 (require 'use-package)
 
+(add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
+(require 'my-python)
+
 (setq
  use-package-always-ensure t
  use-package-verbose t)
@@ -657,39 +660,8 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
-(add-to-list 'load-path "~/.emacs.d/vendor/django-test-runner/")
-(load "django-test-runner.el")
 
 (setq create-lockfiles nil)
-
-(use-package py-isort
-  :ensure t)
-
-(use-package python
-  :init
-  (require 'python)
-  :bind (:map python-mode-map
-          ("C-<f9>" . mw/python--add-pudb-breakpoint)
-          ("<f10>" . django-test-runner)
-          ("C-M-<f9>" . mw/python--remove-breakpoints)
-          ("C-M-f" . sp-forward-sexp)
-          ("C-M-b" . sp-backward-sexp)
-          ("<f2>" . py-isort-buffer))
-  :config
-  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))
-
-(use-package lsp-python-ms
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))  ; or lsp-deferred
-
-(use-package pyvenv
-  :ensure t)
-
-(use-package auto-virtualenv
-  :ensure t)
-
 
 ;;; Javascript
 (use-package vue-mode

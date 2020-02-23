@@ -246,7 +246,9 @@
 
 ;; ZOOM
 (use-package zoom
-  :ensure t)
+  :ensure t
+  :config
+  (zoom-mode t))
 
 ;;; OS specific config
 (defconst *is-a-mac* (eq system-type 'darwin))

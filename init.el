@@ -49,6 +49,7 @@
 (require 'my-javascript)
 (require 'my-haskell)
 (require 'my-docker)
+(require 'my-go)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.

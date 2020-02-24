@@ -40,6 +40,7 @@
 		    "f w" 'save-buffer
 		    "f f" 'ido-find-file
 		    "f s" 'swiper
+		    "f S" 'swiper-at-point
 		    "f c" 'copy-file-name-to-clipboard
 
 		    ;; buffer operations

@@ -7,7 +7,7 @@
   :ensure t)
 
 (add-hook 'go-mode-hook 'lsp-deferred)
-(add-hook 'go-mode-hook 'gofmt-before-save)
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 (provide 'my-go)
 ;;; my-go.el ends here

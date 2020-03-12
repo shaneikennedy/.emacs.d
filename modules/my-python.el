@@ -6,8 +6,8 @@
 ;; locally.
 
 ;;; Code:
-(add-to-list 'load-path "~/.emacs.d/vendor/django-test-runner/")
-(load "django-test-runner.el")
+(quelpa '(django-test-runner :fetcher github :repo "bcfurtado/django-test-runner.el"))
+(require 'django-test-runner )
 
 (use-package python
   :init

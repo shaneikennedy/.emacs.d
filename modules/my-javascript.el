@@ -14,8 +14,8 @@
   :ensure t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(add-to-list 'load-path "~/dev/shane/npm.el/")
-(load "npm.el")
+(quelpa '(npm :fetcher github :repo "shaneikennedy/npm.el"))
+(require 'npm)
 
 (defun sk/vue-base()
   "Snippet for base vue template."

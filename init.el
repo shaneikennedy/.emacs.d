@@ -22,6 +22,12 @@
 
 (package-initialize)
 
+(unless (package-installed-p 'quelpa)
+    (with-temp-buffer
+      (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
+      (eval-buffer)
+      (quelpa-self-upgrade)))
+
 ;; Ensure use-package is present. From here on out, all packages are loaded
 ;; with use-package.
 (unless (package-installed-p 'use-package)

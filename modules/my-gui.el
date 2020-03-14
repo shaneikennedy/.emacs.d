@@ -213,16 +213,6 @@
   :config
   (bind-key "M-j" (lambda () (interactive) (join-line -1))))
 
-(use-package super-save
-  :ensure t
-  :diminish super-save-mode
-  :config
-  (setq super-save-auto-save-when-idle t
-    super-save-idle-duration 5)
-  (add-to-list 'super-save-triggers 'ace-window)
-  (add-to-list 'super-save-triggers 'magit-status)
-  (super-save-mode +1))
-
 (use-package ace-window
   :ensure t
   :diminish ace-window-mode

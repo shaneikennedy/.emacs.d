@@ -3,8 +3,12 @@
 ;;; Commentary:
 
 ;;; Code:
-(use-package go-mode
+(use-package gotest
   :ensure t)
+
+(use-package go-mode
+  :ensure t
+  :bind (("C-c t" . go-test-current-test)))
 
 (add-hook 'go-mode-hook 'lsp-deferred)
 (add-hook 'before-save-hook #'gofmt-before-save)

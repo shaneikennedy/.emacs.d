@@ -15,8 +15,7 @@
 (when (window-system)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
-  (tooltip-mode -1)
-  (fringe-mode -1))
+  (tooltip-mode -1))
 
 ;; The Doom Emacs themes look really good.
 (use-package doom-themes
@@ -294,7 +293,7 @@
   :demand t
   :config
     (diff-hl-flydiff-mode +1)
-    (global-diff-hl-mode +1)
+    (global-diff-hl-mode)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
     (add-hook 'dired-mode-hook 'diff-hl-dired-mode-unless-remote))
 

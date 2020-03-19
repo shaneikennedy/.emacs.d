@@ -65,6 +65,8 @@
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
 
+(use-package yaml-mode)
+
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)

@@ -20,7 +20,7 @@
 ;; The Doom Emacs themes look really good.
 (use-package doom-themes
   :config
-  (load-theme 'doom-vibrant)
+  (load-theme 'doom-city-lights)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
@@ -348,6 +348,19 @@
 
 ;; Always prefer newer files.
 (setq load-prefer-newer t)
+
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  (setq doom-modeline-height 15)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-minor-modes nil)
+  (setq doom-modeline-lsp t)
+  (setq doom-modeline-env-version t)
+  (setq doom-modeline-buffer-file-name-style 'truncate-all))
+
+
 
 (provide 'my-gui)
 ;;; my-gui.el ends here

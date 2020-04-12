@@ -191,7 +191,7 @@
         dashboard-center-content t
         dashboard-banner-logo-title "Be careful"
         dashboard-items '((recents  . 5)
-                        (projects . 5))
+                        (projects . 10))
         dashboard-set-footer nil))
 
 (use-package all-the-icons

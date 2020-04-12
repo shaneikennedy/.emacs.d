@@ -51,6 +51,10 @@
 		    ;; shell
 		    "T" 'shell
 
+                    ;; errors
+                    "e n" 'flycheck-next-error
+                    "e p" 'flycheck-previous-error
+
 		    ;; window commands
 		    "w d" 'delete-window
 		    "w n" 'split-right-and-enter

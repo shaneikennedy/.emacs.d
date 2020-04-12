@@ -67,6 +67,8 @@
 
 (use-package yaml-mode)
 
+(use-package sqlformat)
+
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)

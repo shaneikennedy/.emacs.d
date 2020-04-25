@@ -349,6 +349,7 @@
 ;; Always prefer newer files.
 (setq load-prefer-newer t)
 
+;; M-x all-the-icons-install-fonts <- necessary!
 (use-package doom-modeline
   :ensure t
   :init

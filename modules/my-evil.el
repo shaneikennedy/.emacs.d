@@ -23,7 +23,6 @@
 
 		    ;; code commands
 		    "c d" 'lsp-find-definition
-                    "c i" 'counsel-imenu
 		    ";" 'comment-line
 
 		    ;; projectile commands

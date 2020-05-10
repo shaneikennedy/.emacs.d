@@ -64,6 +64,12 @@
 		    :ensure t)
 		    (modify-syntax-entry ?_ "w")
 
+                    (use-package evil-snipe
+                      :after evil
+                      :config
+                      (setq evil-snipe-scope 'buffer)
+                      (evil-snipe-mode +1))
+
 		    (use-package evil-surround
 		    :ensure t
 		    :config

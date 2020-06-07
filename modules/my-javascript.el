@@ -15,6 +15,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (use-package npm)
+(use-package prettier-js)
 
 (defun sk/vue-base()
   "Snippet for base vue template."

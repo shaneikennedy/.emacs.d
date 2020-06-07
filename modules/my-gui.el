@@ -194,8 +194,11 @@
                         (projects . 10))
         dashboard-set-footer nil))
 
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons)
+(use-package all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(add-hook 'dired-mode-hook (lambda() 'dired-hide-details-mode 1))
+
 
 (use-package page-break-lines
   :ensure t

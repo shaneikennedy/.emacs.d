@@ -51,6 +51,7 @@
 		    "T" 'shell
 
                     ;; errors
+                    "e f" 'flycheck-first-error
                     "e n" 'flycheck-next-error
                     "e p" 'flycheck-previous-error
 

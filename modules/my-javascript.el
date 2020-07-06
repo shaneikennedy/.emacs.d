@@ -8,7 +8,11 @@
   :ensure t
   :mode "\\.vue\\'"
   :config
-  (setq mmm-submode-decoration-level 0))
+  (add-hook 'vue-mode-hook #'lsp)
+  (add-hook 'vue-mode-hook #'editorconfig-apply))
+
+(use-package emmet-mode
+  :hook (css-mode sgml-mode vue-mode))
 
 (use-package js2-mode
   :ensure t)

@@ -46,6 +46,18 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; Keychain stuff. Note to self: if you keep having to enter your
+;; keychain password on OS X, make sure that you have the following in .ssh/config:
+;; Host *
+;;    UseKeychain yes
+(use-package keychain-environment
+  :config
+  (keychain-refresh-environment))
+
+;; Ensure GNU ELPA has the GPG keys it needs
+(use-package gnu-elpa-keyring-update)
+
+
 ;; Custom modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)

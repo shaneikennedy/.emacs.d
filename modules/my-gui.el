@@ -7,6 +7,12 @@
 ;; Fullscreen by default, as early as possible.
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(use-package which-key
+  :config
+  (setq which-key-add-column-padding 2.5)
+  (setq which-key-popup-type 'minibuffer)
+  (which-key-mode))
+
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
 

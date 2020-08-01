@@ -5,13 +5,14 @@
 
 ;;; Code:
 (use-package vue-mode
-  :ensure t
-  :mode "\\.vue\\'"
   :config
-  (setq mmm-submode-decoration-level 0))
+  (setq mmm-submode-decoration-level 0)
+  (add-hook 'vue-mode-hook #'lsp))
 
-(use-package js2-mode
-  :ensure t)
+(use-package emmet-mode
+  :hook (css-mode sgml-mode vue-mode))
+
+(use-package js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (use-package npm)

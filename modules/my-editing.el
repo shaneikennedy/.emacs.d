@@ -43,6 +43,13 @@
   :config
   (editorconfig-mode t))
 
+(with-eval-after-load 'editorconfig
+  (add-to-list 'editorconfig-indentation-alist
+               '(vue-mode css-indent-offset
+                          js-indent-level
+                          sgml-basic-offset
+                          ssass-tab-width)))
+
 (use-package flycheck
   :ensure t
   :diminish flycheck-mode

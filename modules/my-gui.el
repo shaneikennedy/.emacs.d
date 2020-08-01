@@ -7,6 +7,12 @@
 ;; Fullscreen by default, as early as possible.
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(use-package which-key
+  :config
+  (setq which-key-add-column-padding 2.5)
+  (setq which-key-popup-type 'minibuffer)
+  (which-key-mode))
+
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
 
@@ -331,16 +337,6 @@
   (add-to-list 'recentf-exclude "\\.emacs.d")
   (add-to-list 'recentf-exclude ".+tmp......\\.org"))
 
-;; Keychain stuff. Note to self: if you keep having to enter your
-;; keychain password on OS X, make sure that you have the following in .ssh/config:
-;; Host *
-;;    UseKeychain yes
-(use-package keychain-environment
-  :config
-  (keychain-refresh-environment))
-
-;; Ensure GNU ELPA has the GPG keys it needs
-(use-package gnu-elpa-keyring-update)
 
 ;; Haven't figured out how to diminish eldoc-mode outside of
 ;; requiring this explicitly and doing it manually.

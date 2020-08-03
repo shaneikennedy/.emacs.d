@@ -32,6 +32,7 @@
 
 		    ;; magit shortcuts
 		    "g s" 'magit-status
+		    "g h" 'magithub-dashboard
 		    "g c" 'magit-checkout
 		    "g b" 'magit-blame
 

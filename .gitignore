@@ -20,6 +20,9 @@ network-security.data
 ## magithub
 magithub
 
+## Forge
+forge-database.sqlite
+
 custom.el
 
 ## restclient

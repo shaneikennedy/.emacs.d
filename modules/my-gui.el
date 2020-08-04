@@ -297,11 +297,9 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
-(use-package magithub
-  :after magit
-  :config
-  (magithub-feature-autoinject t)
-  (setq magithub-clone-default-directory "~/dev/shane"))
+(use-package forge
+  :after magit)
+
 
 (use-package diff-hl
   :ensure t

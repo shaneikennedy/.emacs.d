@@ -15,6 +15,8 @@
 
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
 
 ;; Disable otiose GUI settings: they just waste space.
 ;; fringe-mode is especially ruinous performance-wise.

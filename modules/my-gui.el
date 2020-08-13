@@ -15,6 +15,8 @@
 
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
 
 ;; Disable otiose GUI settings: they just waste space.
 ;; fringe-mode is especially ruinous performance-wise.
@@ -296,6 +298,10 @@
   (advice-add 'magit-commit  :before #'maybe-unset-buffer-modified)
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
+
+(use-package forge
+  :after magit)
+
 
 (use-package diff-hl
   :ensure t

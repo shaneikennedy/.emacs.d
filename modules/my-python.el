@@ -28,7 +28,6 @@
   :bind (:map python-mode-map
               ("M-q" . blacken-buffer))
   :config
-  (setq blacken-skip-string-normalization t)
   (setq blacken-line-length 79))
 
 (use-package py-isort

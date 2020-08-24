@@ -194,7 +194,7 @@
    "Set the transparency of the frame window given a VALUE, 0=transparent/100=opaque."
    (interactive "nTransparency value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
-(transparency 92)
+(transparency 100)
 
 (use-package dashboard
   :ensure t

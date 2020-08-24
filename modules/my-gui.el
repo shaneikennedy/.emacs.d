@@ -53,6 +53,10 @@
          ("C-s"     . swiper))
   :diminish)
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 ;; ivy-rich makes Ivy look a little bit more like Helm.
 (use-package ivy-rich
   :after counsel
@@ -62,6 +66,7 @@
    ivy-rich-path-style 'abbrev)
   :init
   (ivy-rich-mode))
+(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
 ;; Provides visual interface to hydra layouts. I don't really
 ;; use hydras anywhere yet but some packages do.

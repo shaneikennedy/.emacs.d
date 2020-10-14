@@ -26,9 +26,7 @@
 
 (use-package blacken
   :bind (:map python-mode-map
-              ("M-q" . blacken-buffer))
-  :config
-  (setq blacken-line-length 79))
+              ("M-q" . blacken-buffer)))
 
 (use-package py-isort
   :ensure t)

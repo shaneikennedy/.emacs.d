@@ -349,13 +349,6 @@
   (add-to-list 'recentf-exclude ".+tmp......\\.org"))
 
 
-;; Haven't figured out how to diminish eldoc-mode outside of
-;; requiring this explicitly and doing it manually.
-(use-package diminish
-  :ensure t
-  :config
-  (diminish 'eldoc-mode))
-
 ;; Always prefer newer files.
 (setq load-prefer-newer t)
 

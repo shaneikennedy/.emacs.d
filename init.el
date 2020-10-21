@@ -58,6 +58,12 @@
 (use-package gnu-elpa-keyring-update)
 
 
+;; Loading before nearly anything so than any package is diminishable and the modeline doesn't get fucked
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'eldoc-mode))
+
 ;; Custom modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)

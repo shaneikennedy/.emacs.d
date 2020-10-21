@@ -353,17 +353,14 @@
 (setq load-prefer-newer t)
 
 ;; M-x all-the-icons-install-fonts <- necessary!
-(use-package doom-modeline
-  :ensure t
-  :init
-  (doom-modeline-mode 1)
-  (setq doom-modeline-height 15)
-  (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-lsp t)
-  (setq doom-modeline-env-version t)
-  (setq doom-modeline-buffer-file-name-style 'truncate-all))
+(use-package spaceline
+  :config
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme))
 
+(use-package spaceline-all-the-icons
+  :after spaceline
+  :config (spaceline-all-the-icons-theme))
 
 
 (provide 'my-gui)

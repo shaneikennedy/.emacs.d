@@ -8,6 +8,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (use-package which-key
+  :diminish
   :config
   (setq which-key-add-column-padding 2.5)
   (setq which-key-popup-type 'minibuffer)
@@ -214,7 +215,7 @@
 
 
 (use-package page-break-lines
-  :ensure t
+  :diminish
   :config
   (page-break-lines-mode))
 
@@ -252,6 +253,7 @@
 ;; ZOOM
 (use-package zoom
   :ensure t
+  :diminish
   :config
   (zoom-mode t))
 

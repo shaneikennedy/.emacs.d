@@ -8,10 +8,10 @@
   :bind (("C-." . company-complete))
   :diminish company-mode
   :custom
+  (company-idle-delay 0)
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 20 "The more the merrier.")
-  (company-abort-manual-when-too-short t "Be less enthusiastic about completion.")
+  (company-tooltip-limit 10 "The more the merrier.")
   :config
   (global-company-mode)
 
@@ -20,6 +20,8 @@
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
+
+(use-package company-tabnine)
 
 (use-package lsp-mode
   :commands lsp

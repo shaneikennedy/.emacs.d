@@ -17,6 +17,8 @@
     (add-hook 'vue-mode-hook 'eslintd-fix-mode)
     (add-hook 'js-mode-hook 'eslintd-fix-mode))
 
+(use-package typescript-mode)
+
 (use-package prettier-js)
 
 (quelpa '(npm :fetcher github :repo "shaneikennedy/npm.el"))

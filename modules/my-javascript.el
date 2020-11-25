@@ -12,9 +12,6 @@
 (use-package emmet-mode
   :hook (css-mode sgml-mode vue-mode))
 
-(use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
 (use-package eslintd-fix
   :config
     (add-hook 'vue-mode-hook 'eslintd-fix-mode)

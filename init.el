@@ -86,6 +86,7 @@
     (setq markdown-command "pandoc -f markdown -t html")))
 
 (use-package yaml-mode)
+(use-package jenkinsfile-mode)
 
 (use-package sqlformat)
 

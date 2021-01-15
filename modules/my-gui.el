@@ -7,13 +7,6 @@
 ;; Fullscreen by default, as early as possible.
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(use-package which-key
-  :diminish
-  :config
-  (setq which-key-add-column-padding 2.5)
-  (setq which-key-popup-type 'minibuffer)
-  (which-key-mode))
-
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -69,18 +62,11 @@
   (ivy-rich-mode))
 (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
-;; Provides visual interface to hydra layouts. I don't really
-;; use hydras anywhere yet but some packages do.
-(use-package ivy-hydra)
-
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
-
-;; fish is a good shell. You should try it.
-(use-package fish-mode)
 
 ;; Counsel applies Ivy-like behavior to other builtin features of
 ;; emacs, e.g. search.
@@ -126,13 +112,6 @@
   "Open this very file."
   (interactive)
   (find-file user-init-file))
-
-(defun kill-all-buffers ()
-  "Close all buffers."
-  (interactive)
-  (maybe-unset-buffer-modified)
-  (save-some-buffers)
-  (mapc 'kill-buffer-with-prejudice (buffer-list)))
 
 (defun split-right-and-enter ()
   "Split the window to the right and enter it."
@@ -305,10 +284,6 @@
   (advice-add 'magit-commit  :before #'maybe-unset-buffer-modified)
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
-
-(use-package forge
-  :after magit)
-
 
 (use-package diff-hl
   :ensure t

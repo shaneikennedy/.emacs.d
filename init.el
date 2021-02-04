@@ -106,5 +106,13 @@
   (interactive)
   (add-to-list 'load-path (projectile-project-root)))
 
+(require 'ansi-color)
+(defun my/ansi-colorize-buffer ()
+  "Make sure compilation buffers show colors."
+  (let ((buffer-read-only nil))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+
+(add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
+
 (provide 'init)
 ;;; init.el ends here

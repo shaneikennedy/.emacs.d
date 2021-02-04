@@ -35,8 +35,6 @@
     :config
         (dap-auto-configure-mode))
 
-(use-package company-lsp
-  :commands company-lsp)
 
 (use-package lsp-ui
   :ensure t

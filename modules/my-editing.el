@@ -27,7 +27,8 @@
   :ensure t
   :config
   (setq lsp-prefer-flymake nil
-        lsp-enable-snippet nil))
+        lsp-enable-snippet nil
+        lsp-headerline-breadcrumb-mode nil))
 
 (use-package dap-mode
     :after lsp-mode

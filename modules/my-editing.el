@@ -29,6 +29,10 @@
   (setq lsp-prefer-flymake nil
         lsp-enable-snippet nil))
 
+(use-package dap-mode
+    :after lsp-mode
+    :config
+        (dap-auto-configure-mode))
 
 (use-package company-lsp
   :commands company-lsp)

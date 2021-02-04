@@ -69,8 +69,9 @@
 ;; Custom modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)
-(require 'my-evil)
 (require 'my-editing)
+(require 'my-evil)
+(require 'my-java)
 (require 'my-python)
 (require 'my-javascript)
 (require 'my-haskell)

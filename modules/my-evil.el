@@ -65,8 +65,6 @@
 		    "w 1" 'delete-other-windows
 
 		    ))
-		    (use-package evil-magit
-		    :ensure t)
 		    (modify-syntax-entry ?_ "w")
 
 		    (use-package evil-surround

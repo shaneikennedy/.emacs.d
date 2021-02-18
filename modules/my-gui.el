@@ -162,6 +162,7 @@
   (setq dired-use-ls-dired nil))
 
 (setq-default
+  line-spacing 0.2                       ; Save your eyes
   cursor-type 'bar
   indent-tabs-mode nil
   cursor-in-non-selected-windows nil)

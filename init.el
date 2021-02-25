@@ -112,5 +112,33 @@
 
 (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
+(use-package bazel-mode)
+
+(defun my/get-relative-path ()
+  "Get the current file path relative to projectiile's root."
+  (string-remove-suffix "/BUILD" (string-remove-prefix (projectile-project-root) (expand-file-name (buffer-name (current-buffer))))))
+
+(defun my/build-bazel ()
+  "Run Bazel's build for a given directory."
+  (interactive)
+  (save-excursion
+    (let* ((cmd (concat "bazelisk build " "//" (my/get-relative-path))))
+       (setq compilation-read-command t)
+       (setq compile-command cmd)
+       (set-buffer (find-file-noselect (projectile-project-root)))
+       (call-interactively 'compile))))
+
+
+(defun my/test-bazel ()
+  "Run Bazel's test for a given directory."
+  (interactive)
+  (save-excursion
+    (let* ((cmd (concat "bazelisk test " "//" (my/get-relative-path))))
+       (setq compilation-read-command t)
+       (setq compile-command cmd)
+       (set-buffer (find-file-noselect (projectile-project-root)))
+       (call-interactively 'compile))))
+
+
 (provide 'init)
 ;;; init.el ends here

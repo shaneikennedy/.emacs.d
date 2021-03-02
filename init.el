@@ -114,30 +114,44 @@
 
 (use-package bazel-mode)
 
-(defun my/get-relative-path ()
+(defun bazel--get-relative-path ()
   "Get the current file path relative to projectiile's root."
-  (string-remove-suffix "/BUILD" (string-remove-prefix (projectile-project-root) (expand-file-name (buffer-name (current-buffer))))))
+  (concat "//" (string-remove-prefix (projectile-project-root) (file-name-directory (buffer-file-name))) "..."))
 
-(defun my/build-bazel ()
+(defun bazel--build ()
   "Run Bazel's build for a given directory."
   (interactive)
   (save-excursion
-    (let* ((cmd (concat "bazelisk build " "//" (my/get-relative-path))))
+    (let* ((cmd (concat "bazelisk build " (bazel--get-relative-path))))
        (setq compilation-read-command t)
        (setq compile-command cmd)
        (set-buffer (find-file-noselect (projectile-project-root)))
        (call-interactively 'compile))))
 
-
-(defun my/test-bazel ()
+(defun bazel--test ()
   "Run Bazel's test for a given directory."
   (interactive)
   (save-excursion
-    (let* ((cmd (concat "bazelisk test " "//" (my/get-relative-path))))
+    (let* ((cmd (concat "bazelisk test " (bazel--get-relative-path))))
        (setq compilation-read-command t)
        (setq compile-command cmd)
        (set-buffer (find-file-noselect (projectile-project-root)))
        (call-interactively 'compile))))
+
+(define-transient-command bazel-menu ()
+  "Open bazel transient menu pop up."
+    [["Command"
+      ("b" "Build"       bazel--build)
+      ("t" "Test"       bazel--test)]]
+  (interactive)
+  (transient-setup 'bazel-menu))
+
+;; Optional
+(add-hook 'java-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b m") #'bazel)
+            (local-set-key (kbd "C-c C-b b") #'bazel--build)
+            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
 
 
 (provide 'init)

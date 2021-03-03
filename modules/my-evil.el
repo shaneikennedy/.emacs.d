@@ -25,19 +25,21 @@
 		    "c d" 'lsp-find-definition
 		    ";" 'comment-line
 
-		    ;; projectile commands
-		    "p r" 'deadgrep
+		    ;; project commands
+		    "p R" 'deadgrep
 		    "p f" 'projectile-find-file
 		    "p p" 'projectile-switch-project
+                    "p r" 'counsel-rg
 
 		    ;; magit shortcuts
 		    "g s" 'magit-status
+		    "g h" 'magithub-dashboard
 		    "g c" 'magit-checkout
 		    "g b" 'magit-blame
 
 		    ;; file operations
 		    "f w" 'save-buffer
-		    "f f" 'ido-find-file
+		    "f f" 'counsel-find-file
 		    "f s" 'swiper
 		    "f S" 'swiper-at-point
 		    "f c" 'copy-file-name-to-clipboard

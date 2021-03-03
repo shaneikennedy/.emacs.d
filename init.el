@@ -69,6 +69,7 @@
 (require 'my-docker)
 (require 'my-go)
 (require 'my-cpp)
+(require 'my-prolog)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.

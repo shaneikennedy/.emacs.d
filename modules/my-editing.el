@@ -25,7 +25,6 @@
   :commands lsp
   :ensure t
   :config
-  (require 'lsp-clients)
   (setq lsp-prefer-flymake nil
         lsp-enable-snippet nil))
 

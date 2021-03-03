@@ -15,6 +15,8 @@
 
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
 
 ;; Disable otiose GUI settings: they just waste space.
 ;; fringe-mode is especially ruinous performance-wise.
@@ -51,6 +53,10 @@
          ("C-s"     . swiper))
   :diminish)
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 ;; ivy-rich makes Ivy look a little bit more like Helm.
 (use-package ivy-rich
   :after counsel
@@ -60,6 +66,7 @@
    ivy-rich-path-style 'abbrev)
   :init
   (ivy-rich-mode))
+(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
 ;; Provides visual interface to hydra layouts. I don't really
 ;; use hydras anywhere yet but some packages do.
@@ -187,7 +194,7 @@
    "Set the transparency of the frame window given a VALUE, 0=transparent/100=opaque."
    (interactive "nTransparency value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
-(transparency 92)
+(transparency 100)
 
 (use-package dashboard
   :ensure t
@@ -296,6 +303,10 @@
   (advice-add 'magit-commit  :before #'maybe-unset-buffer-modified)
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
+
+(use-package forge
+  :after magit)
+
 
 (use-package diff-hl
   :ensure t

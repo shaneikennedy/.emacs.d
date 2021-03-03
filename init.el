@@ -93,5 +93,10 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+(defun workon-local-package ()
+  "Add the package that I'm working on to my load path."
+  (interactive)
+  (add-to-list 'load-path (projectile-project-root)))
+
 (provide 'init)
 ;;; init.el ends here

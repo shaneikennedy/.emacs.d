@@ -138,18 +138,18 @@
        (set-buffer (find-file-noselect (projectile-project-root)))
        (call-interactively 'compile))))
 
-(define-transient-command bazel-menu ()
+(define-transient-command bazel--menu ()
   "Open bazel transient menu pop up."
-    [["Command"
+    [["Bazel command"
       ("b" "Build"       bazel--build)
       ("t" "Test"       bazel--test)]]
   (interactive)
-  (transient-setup 'bazel-menu))
+  (transient-setup 'bazel--menu))
 
 ;; Optional
 (add-hook 'java-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c C-b m") #'bazel)
+            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
             (local-set-key (kbd "C-c C-b b") #'bazel--build)
             (local-set-key (kbd "C-c C-b t") #'bazel--test)))
 

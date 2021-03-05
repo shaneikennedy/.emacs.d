@@ -133,6 +133,7 @@
 (ignore-errors (mac-auto-operator-composition-mode))
 
 (setq
+  gc-cons-threshold 100000000            ; Bump garbage collection threshold to 100mb
   compilation-always-kill t              ; Never prompt to kill a compilation session.
   compilation-scroll-output 'first-error ; Always scroll to the bottom.
   make-backup-files nil                  ; No backups, thanks.

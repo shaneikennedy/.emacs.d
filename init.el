@@ -77,6 +77,7 @@
 (require 'my-haskell)
 (require 'my-docker)
 (require 'my-go)
+(require 'my-configs)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.
@@ -85,9 +86,6 @@
   :config
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
-
-(use-package yaml-mode)
-(use-package jenkinsfile-mode)
 
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
@@ -112,7 +110,6 @@
 
 (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
-(use-package bazel-mode)
 
 (defun bazel--get-relative-path ()
   "Get the current file path relative to projectiile's root."

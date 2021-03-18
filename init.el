@@ -77,6 +77,7 @@
 (require 'my-haskell)
 (require 'my-docker)
 (require 'my-go)
+(require 'my-cpp)
 (require 'my-configs)
 
 ;;; MISC things

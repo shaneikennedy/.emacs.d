@@ -10,15 +10,18 @@
   (add-hook 'vue-mode-hook #'lsp))
 
 (use-package emmet-mode
-  :hook (css-mode sgml-mode vue-mode))
-
-(use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  :hook (css-mode sgml-mode vue-mode js-jsx-mode js-mode))
 
 (use-package eslintd-fix
   :config
     (add-hook 'vue-mode-hook 'eslintd-fix-mode)
-    (add-hook 'js2-mode-hook 'eslintd-fix-mode))
+    (add-hook 'js-jsx-mode-hook 'eslintd-fix-mode)
+    (add-hook 'js-mode-hook 'eslintd-fix-mode))
+
+(add-hook 'js-mode-hook 'lsp-deferred)
+(add-hook 'js-jsx-mode-hook 'lsp-deferred)
+
+(use-package typescript-mode)
 
 (use-package prettier-js)
 

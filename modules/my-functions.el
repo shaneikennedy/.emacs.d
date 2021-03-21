@@ -6,9 +6,14 @@
 (defun sk/apply-macro-page ()
   "Apply the currently defined keyboard marco to everyline of the page."
   (interactive)
-  (if (<= (- 1 (line-number-at-pos)) (count-screen-lines))
-      (progn (message (number-to-string (line-number-at-pos))) (call-interactively 'call-last-kbd-macro) (forward-line) (sk/apply-macro-page))
-        (message "Macro applied to full page.")))
+  (if (< (line-number-at-pos) (count-screen-lines))
+      (progn
+          (command-execute 'call-last-kbd-macro)
+          (forward-line)
+          (sk/apply-macro-page))
+      (progn
+          (command-execute 'call-last-kbd-macro)
+          (message "Macro applied to full page."))))
 
 
 (defun copy-file-name-to-clipboard ()

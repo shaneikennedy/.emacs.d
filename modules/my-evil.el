@@ -54,6 +54,11 @@
 		    ;; shell
 		    "T" 'shell
 
+            ;; macros
+            "m s" 'start-kbd-macro
+            "m e" 'end-kbd-macro
+            "m p" 'sk/apply-macro-page
+
             ;; errors
             "e f" 'flycheck-first-error
             "e n" 'flycheck-next-error

@@ -54,10 +54,10 @@
 		    ;; shell
 		    "T" 'shell
 
-                    ;; errors
-                    "e f" 'flycheck-first-error
-                    "e n" 'flycheck-next-error
-                    "e p" 'flycheck-previous-error
+            ;; errors
+            "e f" 'flycheck-first-error
+            "e n" 'flycheck-next-error
+            "e p" 'flycheck-previous-error
 
 		    ;; window commands
 		    "w d" 'delete-window

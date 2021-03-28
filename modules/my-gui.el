@@ -286,6 +286,9 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
+(use-package magit-delta)
+(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+
 (use-package diff-hl
   :ensure t
   :demand t

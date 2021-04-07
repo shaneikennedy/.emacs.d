@@ -7,6 +7,7 @@
 (use-package jenkinsfile-mode)
 (use-package toml-mode)
 (use-package bazel-mode)
+(use-package protobuf-mode)
 
 (provide 'my-configs)
 

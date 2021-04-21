@@ -8,6 +8,7 @@
 (use-package toml-mode)
 (use-package bazel-mode)
 (use-package protobuf-mode)
+(use-package terraform-mode)
 
 (provide 'my-configs)
 

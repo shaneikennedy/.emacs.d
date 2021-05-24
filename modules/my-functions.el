@@ -63,11 +63,22 @@
        (set-buffer (find-file-noselect (projectile-project-root)))
        (call-interactively 'compile))))
 
+(defun bazel--run ()
+  "Run Bazel command for a given directory."
+  (interactive)
+  (save-excursion
+    (let* ((cmd (concat "bazelisk run " (bazel--get-relative-path))))
+       (setq compilation-read-command t)
+       (setq compile-command cmd)
+       (set-buffer (find-file-noselect (projectile-project-root)))
+       (call-interactively 'compile))))
+
 (define-transient-command bazel--menu ()
   "Open bazel transient menu pop up."
     [["Bazel command"
       ("b" "Build"       bazel--build)
-      ("t" "Test"       bazel--test)]]
+      ("r" "Run"         bazel--run)
+      ("t" "Test"        bazel--test)]]
   (interactive)
   (transient-setup 'bazel--menu))
 
@@ -76,6 +87,7 @@
           (lambda ()
             (local-set-key (kbd "C-c C-b m") #'bazel--menu)
             (local-set-key (kbd "C-c C-b b") #'bazel--build)
+            (local-set-key (kbd "C-c C-b r") #'bazel--run)
             (local-set-key (kbd "C-c C-b t") #'bazel--test)))
 
 (provide 'my-functions)

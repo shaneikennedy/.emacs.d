@@ -90,5 +90,26 @@
             (local-set-key (kbd "C-c C-b r") #'bazel--run)
             (local-set-key (kbd "C-c C-b t") #'bazel--test)))
 
+(add-hook 'bazel-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
+            (local-set-key (kbd "C-c C-b b") #'bazel--build)
+            (local-set-key (kbd "C-c C-b r") #'bazel--run)
+            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
+
+(add-hook 'go-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
+            (local-set-key (kbd "C-c C-b b") #'bazel--build)
+            (local-set-key (kbd "C-c C-b r") #'bazel--run)
+            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
+            (local-set-key (kbd "C-c C-b b") #'bazel--build)
+            (local-set-key (kbd "C-c C-b r") #'bazel--run)
+            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
+
 (provide 'my-functions)
 ;;; my-functions.el ends here

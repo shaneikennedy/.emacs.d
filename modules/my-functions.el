@@ -111,5 +111,29 @@
             (local-set-key (kbd "C-c C-b r") #'bazel--run)
             (local-set-key (kbd "C-c C-b t") #'bazel--test)))
 
+(defun git-fetch-reset (remote)
+  "Fetch REMOTE/master and reset master."
+  (progn
+    (magit-fetch-branch remote "master" ())
+    (magit-branch-reset "master" (concat remote "/master"))))
+
+(defun git-sync-origin ()
+  "Sync branch with origin."
+  (interactive)
+  (git-fetch-reset "origin"))
+
+(defun git-sync-upstream ()
+  "Sync branch with origin."
+  (interactive)
+  (git-fetch-reset "upstream"))
+
+(define-transient-command git-sync ()
+  "Open git-sync transient menu pop up."
+    [["Git sync"
+      ("o" "origin"       git-sync-origin)
+      ("u" "upstream"         git-sync-upstream)]]
+  (interactive)
+  (transient-setup 'git-sync))
+
 (provide 'my-functions)
 ;;; my-functions.el ends here

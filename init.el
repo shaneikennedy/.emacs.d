@@ -70,7 +70,6 @@
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)
 (require 'my-editing)
-(require 'my-functions)
 (require 'my-java)
 (require 'my-python)
 (require 'my-javascript)
@@ -80,6 +79,7 @@
 (require 'my-cpp)
 (require 'my-evil)
 (require 'my-configs)
+(require 'my-functions)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.

@@ -78,6 +78,7 @@
 (require 'my-go)
 (require 'my-cpp)
 (require 'my-evil)
+(require 'my-rust)
 (require 'my-configs)
 (require 'my-functions)
 

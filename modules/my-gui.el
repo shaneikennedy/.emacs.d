@@ -22,7 +22,7 @@
 ;; The Doom Emacs themes look really good.
 (use-package doom-themes
   :config
-  (load-theme 'doom-moonlight)
+  (load-theme 'doom-molokai)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 

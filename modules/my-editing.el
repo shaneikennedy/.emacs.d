@@ -22,6 +22,11 @@
           (number-sequence 0 9))))
 
 
+(use-package company-prescient
+  :config
+  (company-prescient-mode t))
+
+
 (use-package lsp-mode
   :commands lsp
   :ensure t

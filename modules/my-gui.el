@@ -62,6 +62,10 @@
   (ivy-rich-mode))
 (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
+(use-package ivy-prescient
+  :config
+  (ivy-prescient-mode t))
+
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
 (use-package exec-path-from-shell

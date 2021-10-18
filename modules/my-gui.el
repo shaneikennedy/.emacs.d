@@ -109,9 +109,6 @@
   :init
   (counsel-projectile-mode))
 
-;; Sort commands by recency in ivy windows.
-(use-package smex)
-
 (defun open-init-file ()
   "Open this very file."
   (interactive)

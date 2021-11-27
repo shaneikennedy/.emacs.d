@@ -107,7 +107,6 @@
 			(fundamental-mode . emacs)))
       (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
     ))
-(global-undo-tree-mode)
-(evil-set-undo-system 'undo-tree)
+
 (provide 'my-evil)
 ;;; my-evil.el ends here

@@ -60,15 +60,11 @@
 (use-package flycheck-haskell
   :ensure t)
 
-(use-package company-ghc
-  :ensure t)
-
 (use-package lsp-haskell
   :ensure t)
 
-(setq lsp-haskell-process-path-hie "hie-wrapper")
-(add-to-list 'company-backends 'company-ghc)
 (add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
 (add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
 (add-hook 'haskell-mode-hook #'hindent-mode)
 (provide 'my-haskell)

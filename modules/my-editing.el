@@ -8,10 +8,10 @@
   :bind (("C-." . company-complete))
   :diminish company-mode
   :custom
+  (company-idle-delay 0)
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 20 "The more the merrier.")
-  (company-abort-manual-when-too-short t "Be less enthusiastic about completion.")
+  (company-tooltip-limit 10 "The more the merrier.")
   :config
   (global-company-mode)
 
@@ -21,16 +21,25 @@
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
 
+
+(use-package company-prescient
+  :config
+  (company-prescient-mode t))
+
+
 (use-package lsp-mode
   :commands lsp
   :ensure t
   :config
   (setq lsp-prefer-flymake nil
-        lsp-enable-snippet nil))
+        lsp-enable-snippet nil
+        lsp-headerline-breadcrumb-mode nil))
 
+(use-package dap-mode
+    :after lsp-mode
+    :config
+        (dap-auto-configure-mode))
 
-(use-package company-lsp
-  :commands company-lsp)
 
 (use-package lsp-ui
   :ensure t

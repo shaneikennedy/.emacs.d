@@ -18,10 +18,10 @@
   :config
   (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))
 
-(use-package lsp-python-ms
+(use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
+                          (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
 
 (use-package blacken

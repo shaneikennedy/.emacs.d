@@ -57,11 +57,18 @@
 ;; Ensure GNU ELPA has the GPG keys it needs
 (use-package gnu-elpa-keyring-update)
 
+(ignore-errors
+    (set-frame-font "Hack Nerd Font Mono 13"))
+
+;; Loading before nearly anything so than any package is diminishable and the modeline doesn't get fucked
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'eldoc-mode))
 
 ;; Custom modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'my-gui)
-(require 'my-evil)
 (require 'my-editing)
 (require 'my-python)
 (require 'my-javascript)
@@ -70,6 +77,10 @@
 (require 'my-go)
 (require 'my-cpp)
 (require 'my-prolog)
+(require 'my-evil)
+(require 'my-rust)
+(require 'my-configs)
+(require 'my-functions)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.
@@ -79,24 +90,20 @@
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
 
-(use-package yaml-mode)
-
-(use-package sqlformat)
-
-(defun copy-file-name-to-clipboard ()
-  "Copy the current buffer file name to the clipboard."
-  (interactive)
-  (let ((filename (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer file name '%s' to the clipboard." filename))))
-
-(defun workon-local-package ()
-  "Add the package that I'm working on to my load path."
-  (interactive)
-  (add-to-list 'load-path (projectile-project-root)))
+(use-package dumb-jump)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+(use-package ivy-xref
+  :ensure t
+  :init
+  ;; xref initialization is different in Emacs 27 - there are two different
+  ;; variables which can be set rather than just one
+  (when (>= emacs-major-version 27)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs))
+  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+  ;; as well
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (provide 'init)
 ;;; init.el ends here

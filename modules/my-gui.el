@@ -7,12 +7,6 @@
 ;; Fullscreen by default, as early as possible.
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(use-package which-key
-  :config
-  (setq which-key-add-column-padding 2.5)
-  (setq which-key-popup-type 'minibuffer)
-  (which-key-mode))
-
 ;; UTF-8 everywhere, please.
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -28,7 +22,7 @@
 ;; The Doom Emacs themes look really good.
 (use-package doom-themes
   :config
-  (load-theme 'doom-dark+)
+  (load-theme 'doom-molokai)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
@@ -68,18 +62,15 @@
   (ivy-rich-mode))
 (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
-;; Provides visual interface to hydra layouts. I don't really
-;; use hydras anywhere yet but some packages do.
-(use-package ivy-hydra)
+(use-package ivy-prescient
+  :config
+  (ivy-prescient-mode t))
 
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
-
-;; fish is a good shell. You should try it.
-(use-package fish-mode)
 
 ;; Counsel applies Ivy-like behavior to other builtin features of
 ;; emacs, e.g. search.
@@ -118,20 +109,10 @@
   :init
   (counsel-projectile-mode))
 
-;; Sort commands by recency in ivy windows.
-(use-package smex)
-
 (defun open-init-file ()
   "Open this very file."
   (interactive)
   (find-file user-init-file))
-
-(defun kill-all-buffers ()
-  "Close all buffers."
-  (interactive)
-  (maybe-unset-buffer-modified)
-  (save-some-buffers)
-  (mapc 'kill-buffer-with-prejudice (buffer-list)))
 
 (defun split-right-and-enter ()
   "Split the window to the right and enter it."
@@ -153,6 +134,7 @@
 (ignore-errors (mac-auto-operator-composition-mode))
 
 (setq
+  gc-cons-threshold 100000000            ; Bump garbage collection threshold to 100mb
   compilation-always-kill t              ; Never prompt to kill a compilation session.
   compilation-scroll-output 'first-error ; Always scroll to the bottom.
   make-backup-files nil                  ; No backups, thanks.
@@ -174,7 +156,6 @@
   mac-mouse-wheel-smooth-scroll nil      ; no smooth scrolling
   mac-drawing-use-gcd t                  ; and you can do it on other frames
   mark-even-if-inactive nil              ; prevent really unintuitive undo behavior
-  electric-pair-mode 1                   ; match parens
   )
 
 ;; dired whines at you on macOS unless you do this.
@@ -182,6 +163,7 @@
   (setq dired-use-ls-dired nil))
 
 (setq-default
+  line-spacing 0.2                       ; Save your eyes
   cursor-type 'bar
   indent-tabs-mode nil
   cursor-in-non-selected-windows nil)
@@ -214,7 +196,7 @@
 
 
 (use-package page-break-lines
-  :ensure t
+  :diminish
   :config
   (page-break-lines-mode))
 
@@ -252,6 +234,7 @@
 ;; ZOOM
 (use-package zoom
   :ensure t
+  :diminish
   :config
   (zoom-mode t))
 
@@ -304,9 +287,8 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
-(use-package forge
-  :after magit)
-
+(use-package magit-delta)
+(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
 
 (use-package diff-hl
   :ensure t
@@ -349,29 +331,8 @@
   (add-to-list 'recentf-exclude ".+tmp......\\.org"))
 
 
-;; Haven't figured out how to diminish eldoc-mode outside of
-;; requiring this explicitly and doing it manually.
-(use-package diminish
-  :ensure t
-  :config
-  (diminish 'eldoc-mode))
-
 ;; Always prefer newer files.
 (setq load-prefer-newer t)
-
-;; M-x all-the-icons-install-fonts <- necessary!
-(use-package doom-modeline
-  :ensure t
-  :init
-  (doom-modeline-mode 1)
-  (setq doom-modeline-height 15)
-  (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-lsp t)
-  (setq doom-modeline-env-version t)
-  (setq doom-modeline-buffer-file-name-style 'truncate-all))
-
-
 
 (provide 'my-gui)
 ;;; my-gui.el ends here

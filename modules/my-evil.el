@@ -23,13 +23,15 @@
 
 		    ;; code commands
 		    "c d" 'lsp-find-definition
+            "c r" 'lsp-rename
+            "c u" 'lsp-find-references
 		    ";" 'comment-line
 
 		    ;; project commands
 		    "p R" 'deadgrep
 		    "p f" 'projectile-find-file
 		    "p p" 'projectile-switch-project
-                    "p r" 'counsel-rg
+            "p r" 'counsel-rg
 
 		    ;; magit shortcuts
 		    "g s" 'magit-status
@@ -52,10 +54,15 @@
 		    ;; shell
 		    "T" 'shell
 
-                    ;; errors
-                    "e f" 'flycheck-first-error
-                    "e n" 'flycheck-next-error
-                    "e p" 'flycheck-previous-error
+            ;; macros
+            "m s" 'start-kbd-macro
+            "m e" 'end-kbd-macro
+            "m p" 'sk/apply-macro-page
+
+            ;; errors
+            "e f" 'flycheck-first-error
+            "e n" 'flycheck-next-error
+            "e p" 'flycheck-previous-error
 
 		    ;; window commands
 		    "w d" 'delete-window
@@ -63,15 +70,7 @@
 		    "w 1" 'delete-other-windows
 
 		    ))
-		    (use-package evil-magit
-		    :ensure t)
 		    (modify-syntax-entry ?_ "w")
-
-                    (use-package evil-snipe
-                      :after evil
-                      :config
-                      (setq evil-snipe-scope 'buffer)
-                      (evil-snipe-mode +1))
 
 		    (use-package evil-surround
 		    :ensure t

@@ -38,6 +38,7 @@
 		    "g h" 'magithub-dashboard
 		    "g c" 'magit-checkout
 		    "g b" 'magit-blame
+                    "g l" 'magit-log-buffer-file
 
 		    ;; file operations
 		    "f w" 'save-buffer

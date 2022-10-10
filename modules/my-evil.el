@@ -14,6 +14,7 @@
 		 :ensure t
 		 :init (global-evil-leader-mode)
 		 (evil-leader/set-leader "<SPC>")
+                 (setq evil-undo-system 'undo-fu)
                  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
 		 :config
 		 (progn

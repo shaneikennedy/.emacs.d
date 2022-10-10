@@ -104,5 +104,10 @@
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
+(use-package zig-mode
+  :bind ("M-q" . zig-format-buffer))
+(setq zig-format-on-save nil)
+(setq lsp-zig-zls-executable "/Users/shane.kennedy/dev/shane/zls/zig-out/bin/zls")
+
 (provide 'init)
 ;;; init.el ends here

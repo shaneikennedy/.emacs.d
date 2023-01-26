@@ -94,5 +94,9 @@
 (setq zig-format-on-save nil)
 (setq lsp-zig-zls-executable "/Users/shane.kennedy/dev/shane/zls/zig-out/bin/zls")
 
+(use-package yaml-mode)
+(use-package protobuf-mode)
+(use-package bazel-mode)
+
 (provide 'init)
 ;;; init.el ends here

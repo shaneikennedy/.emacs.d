@@ -6,14 +6,10 @@
 ;; locally.
 
 ;;; Code:
-(quelpa '(django-test-runner :fetcher github :repo "bcfurtado/django-test-runner.el"))
-(require 'django-test-runner )
-
 (use-package python
   :init
   (require 'python)
   :bind (:map python-mode-map
-          ("<f10>" . django-test-runner)
           ("<f2>" . py-isort-buffer))
   :config
   (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))

@@ -22,11 +22,6 @@
 
 (package-initialize)
 
-(unless (package-installed-p 'quelpa)
-    (with-temp-buffer
-      (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
-      (eval-buffer)
-      (quelpa-self-upgrade)))
 
 ;; Ensure use-package is present. From here on out, all packages are loaded
 ;; with use-package.
@@ -89,10 +84,6 @@
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
 
-(use-package zig-mode
-  :bind ("M-q" . zig-format-buffer))
-(setq zig-format-on-save nil)
-(setq lsp-zig-zls-executable "/Users/shane.kennedy/dev/shane/zls/zig-out/bin/zls")
 
 (use-package yaml-mode)
 (use-package protobuf-mode)

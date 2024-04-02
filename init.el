@@ -87,7 +87,6 @@
 
 (use-package yaml-mode)
 (use-package protobuf-mode)
-(use-package bazel-mode)
 
 (provide 'init)
 ;;; init.el ends here

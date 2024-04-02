@@ -39,78 +39,6 @@
 
 (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
-(defun bazel--get-relative-path ()
-  "Get the current file path relative to projectiile's root."
-  (concat "//" (string-remove-prefix (projectile-project-root) (file-name-directory (buffer-file-name))) "..."))
-
-(defun bazel--build ()
-  "Run Bazel's build for a given directory."
-  (interactive)
-  (save-excursion
-    (let* ((cmd (concat "bazelisk build " (bazel--get-relative-path))))
-       (setq compilation-read-command t)
-       (setq compile-command cmd)
-       (set-buffer (find-file-noselect (projectile-project-root)))
-       (call-interactively 'compile))))
-
-(defun bazel--test ()
-  "Run Bazel's test for a given directory."
-  (interactive)
-  (save-excursion
-    (let* ((cmd (concat "bazelisk test " (bazel--get-relative-path))))
-       (setq compilation-read-command t)
-       (setq compile-command cmd)
-       (set-buffer (find-file-noselect (projectile-project-root)))
-       (call-interactively 'compile))))
-
-(defun bazel--run ()
-  "Run Bazel command for a given directory."
-  (interactive)
-  (save-excursion
-    (let* ((cmd (concat "bazelisk run " (bazel--get-relative-path))))
-       (setq compilation-read-command t)
-       (setq compile-command cmd)
-       (set-buffer (find-file-noselect (projectile-project-root)))
-       (call-interactively 'compile))))
-
-(define-transient-command bazel--menu ()
-  "Open bazel transient menu pop up."
-    [["Bazel command"
-      ("b" "Build"       bazel--build)
-      ("r" "Run"         bazel--run)
-      ("t" "Test"        bazel--test)]]
-  (interactive)
-  (transient-setup 'bazel--menu))
-
-;; Optional
-(add-hook 'java-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
-            (local-set-key (kbd "C-c C-b b") #'bazel--build)
-            (local-set-key (kbd "C-c C-b r") #'bazel--run)
-            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
-
-(add-hook 'bazel-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
-            (local-set-key (kbd "C-c C-b b") #'bazel--build)
-            (local-set-key (kbd "C-c C-b r") #'bazel--run)
-            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
-
-(add-hook 'go-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
-            (local-set-key (kbd "C-c C-b b") #'bazel--build)
-            (local-set-key (kbd "C-c C-b r") #'bazel--run)
-            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-b m") #'bazel--menu)
-            (local-set-key (kbd "C-c C-b b") #'bazel--build)
-            (local-set-key (kbd "C-c C-b r") #'bazel--run)
-            (local-set-key (kbd "C-c C-b t") #'bazel--test)))
-
 (defun git-fetch-reset (remote)
   "Fetch REMOTE/master and reset master."
   (progn
@@ -126,14 +54,6 @@
   "Sync branch with origin."
   (interactive)
   (git-fetch-reset "upstream"))
-
-(define-transient-command git-sync ()
-  "Open git-sync transient menu pop up."
-    [["Git sync"
-      ("o" "origin"       git-sync-origin)
-      ("u" "upstream"         git-sync-upstream)]]
-  (interactive)
-  (transient-setup 'git-sync))
 
 (defun camelcase-region (start end)
   "Change region (START END) from snake_case to camelCase."

@@ -287,6 +287,19 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
+(add-hook 'git-commit-setup-hook
+          (lambda ()
+            (let ((ISSUEKEY "[[:upper:]]+-[[:digit:]]+")
+                  (tag-suffix " ")
+                  (branch (magit-get-current-branch)))
+              (when (string-match-p ISSUEKEY branch)
+                (let ((commit-prefix (replace-regexp-in-string
+                                      (concat ".*?\\(" ISSUEKEY "\\).*")
+                                      (concat "\\1" tag-suffix)
+                                      branch)))
+                  (when (not (string-prefix-p commit-prefix (buffer-string)))
+                    (insert commit-prefix)))))))
+
 (use-package diff-hl
   :ensure t
   :demand t

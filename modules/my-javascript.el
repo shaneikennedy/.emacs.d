@@ -4,23 +4,12 @@
 ;; Nothing special here, includes vue config
 
 ;;; Code:
-(use-package vue-mode
-  :config
-  (setq mmm-submode-decoration-level 0)
-  (add-hook 'vue-mode-hook #'lsp))
-
-(use-package emmet-mode
-  :hook (css-mode sgml-mode vue-mode js-jsx-mode js-mode))
-
-(add-hook 'js-mode-hook 'lsp-deferred)
-(add-hook 'js-jsx-mode-hook 'lsp-deferred)
-
 (use-package typescript-mode)
 
-(use-package prettier-js)
-
-;; (quelpa '(npm :fetcher github :repo "shaneikennedy/npm.el"))
-;; (require 'npm )
+(add-hook 'js-mode-hook (lambda () (lsp)))
+(add-hook 'js-jsx-mode-hook (lambda () (lsp)))
+(add-hook 'tsx-ts-mode (lambda () (lsp)))
+(add-hook 'typescript-mode (lambda () (lsp)))
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here

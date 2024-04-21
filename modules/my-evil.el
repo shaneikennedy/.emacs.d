@@ -24,15 +24,15 @@
 
 		    ;; code commands
 		    "c d" 'lsp-find-definition
-            "c r" 'lsp-rename
-            "c u" 'lsp-find-references
+                    "c r" 'lsp-rename
+                    "c u" 'lsp-find-references
 		    ";" 'comment-line
 
 		    ;; project commands
 		    "p R" 'deadgrep
 		    "p f" 'projectile-find-file
 		    "p p" 'projectile-switch-project
-            "p r" 'counsel-rg
+                    "p r" 'counsel-rg
 
 		    ;; magit shortcuts
 		    "g s" 'magit-status

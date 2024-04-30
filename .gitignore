@@ -49,3 +49,4 @@ workspace
 
 # tree-sitter
 tree-sitter/
+multisession/

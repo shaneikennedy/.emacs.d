@@ -80,7 +80,7 @@
 (require 'my-gui)
 (require 'my-editing)
 (require 'my-python)
-(require 'my-javascript)
+(require 'my-typescript)
 (require 'my-haskell)
 (require 'my-docker)
 (require 'my-go)

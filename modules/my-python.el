@@ -9,19 +9,18 @@
 (use-package python
   :init
   (require 'python)
-  :bind (:map python-mode-map
-          ("<f2>" . py-isort-buffer))
+  :bind (:map python-ts-mode-map
+              ("<f2>" . py-isort-buffer))
   :config
-  (add-hook 'python-mode-hook #'auto-virtualenv-set-virtualenv))
-
+  (add-hook 'python-ts-mode-hook #'auto-virtualenv-set-virtualenv))
 (use-package lsp-pyright
   :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
+  :hook (python-ts-mode . (lambda ()
+                            (require 'lsp-pyright)
+                            (lsp))))  ; or lsp-deferred
 
 (use-package blacken
-  :bind (:map python-mode-map
+  :bind (:map python-ts-mode-map
               ("M-q" . blacken-buffer)))
 
 (use-package py-isort

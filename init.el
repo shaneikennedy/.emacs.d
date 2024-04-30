@@ -97,14 +97,9 @@
   :config
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
-
-(use-package format-all)
-(add-hook 'prog-mode-hook 'format-all-mode)
-(add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 (use-package yaml-mode)
 (use-package protobuf-mode)
 (use-package jinja2-mode)
-
 
 (provide 'init)
 ;;; init.el ends here

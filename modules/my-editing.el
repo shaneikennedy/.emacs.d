@@ -18,7 +18,7 @@
   ;; use numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
+                                  `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
 
 
@@ -35,15 +35,21 @@
         lsp-enable-snippet nil
         lsp-headerline-breadcrumb-mode nil))
 
+(add-hook 'prog-mode-hook #'lsp)
+
 (use-package dap-mode
-    :after lsp-mode
-    :config
-        (dap-auto-configure-mode))
+  :after lsp-mode
+  :config
+  (dap-auto-configure-mode))
 
 
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
+
+(use-package format-all)
+(add-hook 'prog-mode-hook 'format-all-mode)
+(add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 
 (use-package editorconfig
   :ensure t
@@ -65,8 +71,8 @@
   (add-hook 'prog-mode-hook 'flycheck-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq-default flycheck-disabled-checkers
-    (append flycheck-disabled-checkers
-      '(javascript-jshint)))
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
   (flycheck-add-mode 'javascript-eslint 'js2-mode)
   (flycheck-add-mode 'javascript-eslint 'vue-mode))
 

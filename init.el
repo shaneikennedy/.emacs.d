@@ -101,6 +101,7 @@
 (use-package yaml-mode)
 (use-package protobuf-mode)
 (use-package jinja2-mode)
+(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
 
 (provide 'init)
 ;;; init.el ends here

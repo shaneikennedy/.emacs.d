@@ -11,85 +11,86 @@
   (progn
     (setq evil-default-cursor t)
     (use-package evil-leader
-		 :ensure t
-		 :init (global-evil-leader-mode)
-		 (evil-leader/set-leader "<SPC>")
-                 (setq evil-undo-system 'undo-fu)
-                 (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-		 :config
-		 (progn
-		   (setq evil-leader/in-all-states t)
-		   (evil-leader/set-key
-		    "<SPC>" 'ace-window
+      :ensure t
+      :init (global-evil-leader-mode)
+      (evil-leader/set-leader "<SPC>")
+      (setq evil-undo-system 'undo-fu)
+      (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+      :config
+      (progn
+	(setq evil-leader/in-all-states t)
+	(evil-leader/set-key
+	  "<SPC>" 'ace-window
 
-		    ;; code commands
-		    "c d" 'lsp-find-definition
-                    "c r" 'lsp-rename
-                    "c u" 'lsp-find-references
-		    ";" 'comment-line
+	  ;; code commands
+	  "c a" 'lsp-execute-code-action
+	  "c d" 'lsp-find-definition
+          "c r" 'lsp-rename
+          "c u" 'lsp-find-references
+	  ";" 'comment-line
 
-		    ;; project commands
-		    "p R" 'deadgrep
-		    "p f" 'projectile-find-file
-		    "p p" 'projectile-switch-project
-                    "p r" 'counsel-rg
+	  ;; project commands
+	  "p R" 'deadgrep
+	  "p f" 'projectile-find-file
+	  "p p" 'projectile-switch-project
+          "p r" 'counsel-rg
 
-		    ;; magit shortcuts
-		    "g s" 'magit-status
-		    "g h" 'magithub-dashboard
-		    "g c" 'magit-checkout
-		    "g b" 'magit-blame
-                    "g l" 'magit-log-buffer-file
+	  ;; magit shortcuts
+	  "g s" 'magit-status
+	  "g h" 'magithub-dashboard
+	  "g c" 'magit-checkout
+	  "g b" 'magit-blame
+          "g l" 'magit-log-buffer-file
 
-		    ;; file operations
-		    "f w" 'save-buffer
-		    "f f" 'counsel-find-file
-		    "f s" 'swiper
-		    "f S" 'swiper-at-point
-		    "f c" 'copy-file-name-to-clipboard
+	  ;; file operations
+	  "f w" 'save-buffer
+	  "f f" 'counsel-find-file
+	  "f s" 'swiper
+	  "f S" 'swiper-at-point
+	  "f c" 'copy-file-name-to-clipboard
 
-		    ;; buffer operations
-		    "b" 'ivy-switch-buffer
-		    "k" 'kill-buffer
-		    "K" 'kill-this-buffer
+	  ;; buffer operations
+	  "b" 'ivy-switch-buffer
+	  "k" 'kill-buffer
+	  "K" 'kill-this-buffer
 
-		    ;; shell
-		    "T" 'shell
+	  ;; shell
+	  "T" 'shell
 
-            ;; macros
-            "m s" 'start-kbd-macro
-            "m e" 'end-kbd-macro
-            "m p" 'sk/apply-macro-page
+          ;; macros
+          "m s" 'start-kbd-macro
+          "m e" 'end-kbd-macro
+          "m p" 'sk/apply-macro-page
 
-            ;; errors
-            "e f" 'flycheck-first-error
-            "e n" 'flycheck-next-error
-            "e p" 'flycheck-previous-error
+          ;; errors
+          "e f" 'flycheck-first-error
+          "e n" 'flycheck-next-error
+          "e p" 'flycheck-previous-error
 
-		    ;; window commands
-		    "w d" 'delete-window
-		    "w n" 'split-right-and-enter
-		    "w 1" 'delete-other-windows
+	  ;; window commands
+	  "w d" 'delete-window
+	  "w n" 'split-right-and-enter
+	  "w 1" 'delete-other-windows
 
-		    ))
-		    (modify-syntax-entry ?_ "w")
+	  ))
+      (modify-syntax-entry ?_ "w")
 
-		    (use-package evil-surround
-		    :ensure t
-		    :config
-		    (global-evil-surround-mode 1))
+      (use-package evil-surround
+	:ensure t
+	:config
+	(global-evil-surround-mode 1))
 
-		    (use-package evil-org
-		    :ensure t)
-		    ;; boot evil by default
+      (use-package evil-org
+	:ensure t)
+      ;; boot evil by default
 
-                    (use-package evil-collection
-                    :after evil
-                    :ensure t
-                    :config
-                    (evil-collection-init))
+      (use-package evil-collection
+        :after evil
+        :ensure t
+        :config
+        (evil-collection-init))
 
-		    (evil-mode 1)))
+      (evil-mode 1)))
   :config
   (progn
     ;; escape key should always escacpe

@@ -92,8 +92,6 @@
 (require 'my-groovy)
 (require 'my-rust)
 
-(add-hook 'emacs-lisp-mode-hook '(lambda () (lsp-mode -1)))
-
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.
 (use-package markdown-mode

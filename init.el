@@ -92,6 +92,8 @@
 (require 'my-groovy)
 (require 'my-rust)
 
+(add-hook 'emacs-lisp-mode-hook '(lambda () (lsp-mode -1)))
+
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.
 (use-package markdown-mode
@@ -103,6 +105,15 @@
 (use-package protobuf-mode)
 (use-package jinja2-mode)
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
+(setq major-mode-remap-alist
+      '((yaml-mode . yaml-ts-mode)
+        (bash-mode . bash-ts-mode)
+        (typescript-mode . typescript-ts-mode)
+        (json-mode . json-ts-mode)
+        (css-mode . css-ts-mode)
+        (rust-mode . rust-ts-mode)
+        (go-mode . go-ts-mode)
+        (python-mode . python-ts-mode)))
 
 (provide 'init)
 ;;; init.el ends here

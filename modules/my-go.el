@@ -8,10 +8,12 @@
 
 (use-package go-mode
   :ensure t
+  :hook (go-mode . lsp-deferred)
   :bind (("C-c t" . go-test-current-test)))
 
-(add-hook 'go-mode-hook 'lsp-deferred)
-(add-hook 'before-save-hook #'gofmt-before-save)
+(use-package go-ts-mode
+  :hook
+  (go-ts-mode . lsp-deferred))
 
 (provide 'my-go)
 ;;; my-go.el ends here

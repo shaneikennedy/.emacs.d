@@ -32,10 +32,7 @@
   :ensure t
   :config
   (setq lsp-prefer-flymake nil
-        lsp-enable-snippet nil
         lsp-headerline-breadcrumb-mode nil))
-
-(add-hook 'prog-mode-hook #'lsp)
 
 (use-package dap-mode
   :after lsp-mode
@@ -47,7 +44,14 @@
   :ensure t
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-sideline-diagnostic-max-lines 3))
+  (setq lsp-ui-sideline-diagnostic-max-lines 3
+        lsp-ui-doc-enable t
+        lsp-ui-doc-delay 3
+        lsp-ui-doc-position 'at-point
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-diagnostics t ))
 
 (use-package format-all)
 (add-hook 'prog-mode-hook 'format-all-mode)

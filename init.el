@@ -96,7 +96,7 @@
 (require 'my-configs)
 (require 'my-functions)
 (require 'my-groovy)
-(require 'my-rust)
+(require 'my-java)
 
 ;;; MISC things
 ;; I do all of my writing in either org-mode or markdown-mode.

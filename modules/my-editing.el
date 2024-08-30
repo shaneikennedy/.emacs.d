@@ -75,12 +75,7 @@
   :diminish flycheck-mode
   :config
   (add-hook 'prog-mode-hook 'flycheck-mode)
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
-  (flycheck-add-mode 'javascript-eslint 'js2-mode)
-  (flycheck-add-mode 'javascript-eslint 'vue-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (provide 'my-editing)
 ;;; my-editing.el ends here

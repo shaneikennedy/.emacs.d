@@ -109,6 +109,7 @@
 (use-package protobuf-mode)
 (use-package jinja2-mode)
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (setq major-mode-remap-alist
       '((yaml-mode . yaml-ts-mode)
         (bash-mode . bash-ts-mode)

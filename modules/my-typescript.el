@@ -7,6 +7,9 @@
 (use-package typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
+(add-hook 'typescript-mode-hook #'lsp)
+(add-hook 'typescript-ts-mode-hook #'lsp)
+
 (use-package npm)
 
 (provide 'my-typescript)

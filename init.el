@@ -53,7 +53,7 @@
 (use-package gnu-elpa-keyring-update)
 
 (ignore-errors
-    (set-frame-font "Hack Nerd Font Mono 13"))
+  (set-frame-font "Hack Nerd Font Mono 13"))
 
 ;; Loading before nearly anything so than any package is diminishable and the modeline doesn't get fucked
 (use-package diminish
@@ -119,6 +119,11 @@
         (rust-mode . rust-ts-mode)
         (go-mode . go-ts-mode)
         (python-mode . python-ts-mode)))
+
+(add-to-list 'load-path "~/dev/shane/copilot.el/")
+(require 'copilot)
+(add-hook 'prog-mode-hook 'copilot-mode)
+
 
 (provide 'init)
 ;;; init.el ends here

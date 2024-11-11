@@ -120,10 +120,5 @@
         (go-mode . go-ts-mode)
         (python-mode . python-ts-mode)))
 
-(add-to-list 'load-path "~/dev/shane/copilot.el/")
-(require 'copilot)
-(add-hook 'prog-mode-hook 'copilot-mode)
-
-
 (provide 'init)
 ;;; init.el ends here

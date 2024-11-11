@@ -15,5 +15,9 @@
   :hook
   (go-ts-mode . lsp-deferred))
 
+(add-hook 'go-ts-mode-hook 'go-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (flycheck-add-next-checker 'lsp 'go-vet)
+                          (flycheck-add-next-checker 'lsp 'go-staticcheck)))
 (provide 'my-go)
 ;;; my-go.el ends here

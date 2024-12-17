@@ -19,10 +19,6 @@
                             (require 'lsp-pyright)
                             (lsp))))  ; or lsp-deferred
 
-(use-package blacken
-  :bind (:map python-ts-mode-map
-              ("M-q" . blacken-buffer)))
-
 (use-package py-isort
   :ensure t)
 

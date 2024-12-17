@@ -120,5 +120,12 @@
         (go-mode . go-ts-mode)
         (python-mode . python-ts-mode)))
 
+(use-package elixir-mode)
+(add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+(use-package mix
+  :config
+  (add-hook 'elixir-mode-hook 'mix-minor-mode))
 (provide 'init)
 ;;; init.el ends here

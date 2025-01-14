@@ -94,7 +94,6 @@
 ;; It's nice to switch projects without having a goal in mind, just switch and open magit for me
 (defun switch-project-action ()
   "Show magit and the readme when opening a project."
-  (select-frame (make-frame))
   (let ((readme (concat (projectile-project-root) "README.md")))
     (if (file-exists-p readme)
         (find-file readme)))

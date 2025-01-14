@@ -105,11 +105,8 @@
   :config
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
-(use-package yaml-mode)
-(use-package protobuf-mode)
+
 (use-package jinja2-mode)
-(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (setq major-mode-remap-alist
       '((yaml-mode . yaml-ts-mode)
         (bash-mode . bash-ts-mode)
@@ -120,12 +117,11 @@
         (go-mode . go-ts-mode)
         (python-mode . python-ts-mode)))
 
-(use-package elixir-mode)
-(add-hook 'elixir-mode-hook
-          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-
-(use-package mix
+(use-package bun
+  :load-path "~/dev/shane/bun.el/"
+  :ensure nil  ;; Prevents package manager from installing it
   :config
-  (add-hook 'elixir-mode-hook 'mix-minor-mode))
+  ;; Add custom setup here
+  )
 (provide 'init)
 ;;; init.el ends here

@@ -8,6 +8,8 @@
 (use-package toml-mode)
 (use-package protobuf-mode)
 (use-package terraform-mode)
+(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 (provide 'my-configs)
 

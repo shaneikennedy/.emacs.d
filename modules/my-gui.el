@@ -41,10 +41,6 @@
   (defun swiper-at-point ()
     (interactive)
     (swiper (thing-at-point 'word)))
-  :bind (("C-x b"   . ivy-switch-buffer)
-         ("C-c C-r" . ivy-resume)
-         ("C-c s"   . swiper-at-point)
-         ("C-s"     . swiper))
   :diminish)
 
 (use-package all-the-icons-ivy-rich
@@ -79,15 +75,6 @@
   :after ivy
   :init
   (counsel-mode 1)
-
-  :bind (("C-c ;" . counsel-M-x)
-         ("C-c U" . counsel-unicode-char)
-         ("C-c i" . counsel-imenu)
-         ("C-x f" . counsel-find-file)
-         ("C-c y" . counsel-yank-pop)
-	 ("C-c r" . counsel-recentf)
-         :map ivy-minibuffer-map
-         ("C-r" . counsel-minibuffer-history))
   :diminish)
 
 ;; Deadgrep is amazing.
@@ -97,17 +84,11 @@
 ;; projectile comes with Emacs these days, but we want to enable
 ;; caching, since I work on big projects.
 (use-package projectile
-  :bind (("C-c f" . projectile-find-file))
   :config
   (setq projectile-enable-caching t
         projectile-completion-system 'ivy)
   :diminish)
 
-;; Counsel and projectile should work together.
-(use-package counsel-projectile
-  :bind (("C-c f" . counsel-projectile))
-  :init
-  (counsel-projectile-mode))
 
 (defun open-init-file ()
   "Open this very file."
@@ -270,7 +251,6 @@
 
 
 (use-package magit
-  :bind (("C-c g" . magit-status))
   :diminish magit-auto-revert-mode
   :diminish auto-revert-mode
   :custom

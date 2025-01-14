@@ -84,6 +84,8 @@
 ;; projectile comes with Emacs these days, but we want to enable
 ;; caching, since I work on big projects.
 (use-package projectile
+  :init
+  (projectile-mode +1)
   :config
   (setq projectile-enable-caching t
         projectile-completion-system 'ivy)

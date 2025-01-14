@@ -33,7 +33,7 @@
 	  "p R" 'deadgrep
 	  "p f" 'projectile-find-file
 	  "p p" 'projectile-switch-project
-          "p r" 'counsel-rg
+          "p r" 'counsel-projectile-rg
 
 	  ;; magit shortcuts
 	  "g s" 'magit-status

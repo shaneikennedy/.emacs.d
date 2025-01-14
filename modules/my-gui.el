@@ -52,8 +52,8 @@
   :after counsel
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
   :init
   (ivy-rich-mode))
 (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
@@ -146,48 +146,48 @@ at the top level of DIRECTORY."
 (ignore-errors (mac-auto-operator-composition-mode))
 
 (setq
-  gc-cons-threshold 100000000            ; Bump garbage collection threshold to 100mb
-  compilation-always-kill t              ; Never prompt to kill a compilation session.
-  compilation-scroll-output 'first-error ; Always scroll to the bottom.
-  make-backup-files nil                  ; No backups, thanks.
-  auto-save-default nil                  ; Or autosaves. What's the difference between autosaves and backups?
-  create-lockfiles nil                   ; Emacs sure loves to put lockfiles everywhere.
-  inhibit-startup-screen t               ; No need to see GNU agitprop.
-  kill-whole-line t                      ; Lets C-k delete the whole line
-  mac-command-modifier 'super            ; I'm not sure this is the right toggle, but whatever.
-  require-final-newline t                ; Auto-insert trailing newlines.
-  ring-bell-function 'ignore             ; Do not ding. Ever.
-  use-dialog-box nil                     ; Dialogues always go in the modeline.
-  frame-title-format "emacs – %b"        ; Put something useful in the status bar.
-  initial-scratch-message nil            ; SHUT UP SHUT UP SHUT UP
-  mac-option-modifier 'meta              ; why isn't this the default
-  save-interprogram-paste-before-kill t  ; preserve paste to system ring
-  enable-recursive-minibuffers t         ; don't fucking freak out if I use the minibuffer twice
-  sentence-end-double-space nil          ; are you fucking kidding me with this shit
-  confirm-kill-processes nil             ; don't whine at me when I'm quitting.
-  mac-mouse-wheel-smooth-scroll nil      ; no smooth scrolling
-  mac-drawing-use-gcd t                  ; and you can do it on other frames
-  mark-even-if-inactive nil              ; prevent really unintuitive undo behavior
-  )
+ gc-cons-threshold 100000000            ; Bump garbage collection threshold to 100mb
+ compilation-always-kill t              ; Never prompt to kill a compilation session.
+ compilation-scroll-output 'first-error ; Always scroll to the bottom.
+ make-backup-files nil                  ; No backups, thanks.
+ auto-save-default nil                  ; Or autosaves. What's the difference between autosaves and backups?
+ create-lockfiles nil                   ; Emacs sure loves to put lockfiles everywhere.
+ inhibit-startup-screen t               ; No need to see GNU agitprop.
+ kill-whole-line t                      ; Lets C-k delete the whole line
+ mac-command-modifier 'super            ; I'm not sure this is the right toggle, but whatever.
+ require-final-newline t                ; Auto-insert trailing newlines.
+ ring-bell-function 'ignore             ; Do not ding. Ever.
+ use-dialog-box nil                     ; Dialogues always go in the modeline.
+ frame-title-format "emacs – %b"        ; Put something useful in the status bar.
+ initial-scratch-message nil            ; SHUT UP SHUT UP SHUT UP
+ mac-option-modifier 'meta              ; why isn't this the default
+ save-interprogram-paste-before-kill t  ; preserve paste to system ring
+ enable-recursive-minibuffers t         ; don't fucking freak out if I use the minibuffer twice
+ sentence-end-double-space nil          ; are you fucking kidding me with this shit
+ confirm-kill-processes nil             ; don't whine at me when I'm quitting.
+ mac-mouse-wheel-smooth-scroll nil      ; no smooth scrolling
+ mac-drawing-use-gcd t                  ; and you can do it on other frames
+ mark-even-if-inactive nil              ; prevent really unintuitive undo behavior
+ )
 
 ;; dired whines at you on macOS unless you do this.
 (when (eq system-type 'darwin)
   (setq dired-use-ls-dired nil))
 
 (setq-default
-  line-spacing 0.2                       ; Save your eyes
-  cursor-type 'bar
-  indent-tabs-mode nil
-  cursor-in-non-selected-windows nil)
+ line-spacing 0.2                       ; Save your eyes
+ cursor-type 'bar
+ indent-tabs-mode nil
+ cursor-in-non-selected-windows nil)
 
 (set-fill-column 95)
 
 ;; Always trim trailing whitespace.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (defun transparency (value)
-   "Set the transparency of the frame window given a VALUE, 0=transparent/100=opaque."
-   (interactive "nTransparency value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
+  "Set the transparency of the frame window given a VALUE, 0=transparent/100=opaque."
+  (interactive "nTransparency value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
 (transparency 100)
 
 (use-package dashboard
@@ -198,7 +198,7 @@ at the top level of DIRECTORY."
         dashboard-center-content t
         dashboard-banner-logo-title "Be careful"
         dashboard-items '((recents  . 5)
-                        (projects . 10))
+                          (projects . 10))
         dashboard-set-footer nil))
 
 (use-package all-the-icons)
@@ -315,10 +315,10 @@ at the top level of DIRECTORY."
   :ensure t
   :demand t
   :config
-    (diff-hl-flydiff-mode +1)
-    (global-diff-hl-mode)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-    (add-hook 'dired-mode-hook 'diff-hl-dired-mode-unless-remote))
+  (diff-hl-flydiff-mode +1)
+  (global-diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode-unless-remote))
 
 
 (use-package rainbow-delimiters

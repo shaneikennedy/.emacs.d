@@ -37,20 +37,20 @@
   (append-to-list haskell-font-lock-keywords '("capi" "via" "stock" "anyclass"))
 
   (append-to-list haskell-language-extensions
-      '("-XDataKinds"
-        "-XDeriveFoldable"
-        "-XDeriveFunctor"
-        "-XDeriveGeneric"
-        "-XDeriveTraversable"
-        "-XFlexibleContexts"
-        "-XFlexibleInstances"
-        "-XMonadFailDesugaring"
-        "-XMultiParamTypeClasses"
-        "-XOverloadedStrings"
-        "-XRecordWildCards"
-        "-XStandaloneDeriving"
-        "-XStrictData"
-        "-XTypeApplications"))
+                  '("-XDataKinds"
+                    "-XDeriveFoldable"
+                    "-XDeriveFunctor"
+                    "-XDeriveGeneric"
+                    "-XDeriveTraversable"
+                    "-XFlexibleContexts"
+                    "-XFlexibleInstances"
+                    "-XMonadFailDesugaring"
+                    "-XMultiParamTypeClasses"
+                    "-XOverloadedStrings"
+                    "-XRecordWildCards"
+                    "-XStandaloneDeriving"
+                    "-XStrictData"
+                    "-XTypeApplications"))
 
   :mode ("\\.hs$" . haskell-mode))
 

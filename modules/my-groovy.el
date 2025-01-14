@@ -1,7 +1,6 @@
 ;;; my-groovy.el -- Code for groovy configuration
 
 ;;; Commentary:
-;; Basic rust-mode setup
 
 ;;; Code:
 (use-package groovy-mode)

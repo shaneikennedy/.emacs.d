@@ -117,6 +117,13 @@
         (go-mode . go-ts-mode)
         (python-mode . python-ts-mode)))
 
+(use-package yasnippet)
+(use-package yasnippet-snippets)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+(add-hook 'eglot-managed-mode-hook (lambda ()
+                                     (add-to-list 'company-backends
+                                                  '(company-capf :with company-yasnippet))))
+
 (use-package bun
   :load-path "~/dev/shane/bun.el/"
   :ensure nil  ;; Prevents package manager from installing it

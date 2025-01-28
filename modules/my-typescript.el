@@ -10,9 +10,6 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'"    . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'"    . tsx-ts-mode))
 
-(add-hook 'tsx-ts-mode-hook #'lsp-deferred)
-(add-hook 'typescript-ts-mode-hook #'lsp-deferred)
-
 (use-package npm)
 
 (provide 'my-typescript)

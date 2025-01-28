@@ -27,31 +27,10 @@
   (company-prescient-mode t))
 
 
-(use-package lsp-mode
-  :commands lsp
-  :ensure t
-  :config
-  (setq lsp-prefer-flymake nil
-        lsp-headerline-breadcrumb-mode nil))
-
 (use-package dap-mode
-  :after lsp-mode
   :config
   (dap-auto-configure-mode))
 
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-sideline-diagnostic-max-lines 3
-        lsp-ui-doc-enable t
-        lsp-ui-doc-delay 3
-        lsp-ui-doc-position 'at-point
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-sideline-show-code-actions t
-        lsp-ui-sideline-show-hover t
-        lsp-ui-sideline-show-diagnostics t ))
 
 (use-package format-all)
 (add-hook 'prog-mode-hook 'format-all-mode)
@@ -69,13 +48,6 @@
                           js-indent-level
                           sgml-basic-offset
                           ssass-tab-width)))
-
-(use-package flycheck
-  :ensure t
-  :diminish flycheck-mode
-  :config
-  (add-hook 'prog-mode-hook 'flycheck-mode)
-  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (provide 'my-editing)
 ;;; my-editing.el ends here

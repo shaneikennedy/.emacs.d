@@ -16,9 +16,6 @@
 ;; I like format on save
 (setq rust-format-on-save t)
 
-(add-hook 'rust-mode-hook #'lsp)
-(add-hook 'rust-ts-mode-hook #'lsp)
-
 ;; Cargo commands run, build, test
 (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)
 (define-key rust-mode-map (kbd "C-c C-b") 'rust-check)

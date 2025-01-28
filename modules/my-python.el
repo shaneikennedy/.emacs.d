@@ -6,19 +6,7 @@
 ;; locally.
 
 ;;; Code:
-(use-package python
-  :init
-  (require 'python)
-  :bind (:map python-ts-mode-map
-              ("<f2>" . py-isort-buffer))
-  :config
-  (add-hook 'python-ts-mode-hook #'auto-virtualenv-set-virtualenv))
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-ts-mode . (lambda ()
-                            (require 'lsp-pyright)
-                            (lsp))))  ; or lsp-deferred
-
+(use-package python)
 (use-package py-isort
   :ensure t)
 

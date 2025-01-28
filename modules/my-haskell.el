@@ -57,15 +57,6 @@
 (use-package hindent
   :ensure t)
 
-(use-package flycheck-haskell
-  :ensure t)
-
-(use-package lsp-haskell
-  :ensure t)
-
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-literate-mode-hook #'lsp)
-(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
 (add-hook 'haskell-mode-hook #'hindent-mode)
 (provide 'my-haskell)
 ;;; my-haskell.el ends here

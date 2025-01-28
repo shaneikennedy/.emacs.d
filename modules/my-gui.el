@@ -93,6 +93,8 @@
 
 (use-package counsel-projectile)
 
+(use-package eldoc-box)
+
 ;; It's nice to switch projects without having a goal in mind, just switch and open magit for me
 (defun switch-project-action ()
   "Show magit and the readme when opening a project."

@@ -23,10 +23,13 @@
 	  "<SPC>" 'ace-window
 
 	  ;; code commands
-	  "c a" 'lsp-execute-code-action
-	  "c d" 'lsp-find-definition
-          "c r" 'lsp-rename
-          "c u" 'lsp-find-references
+	  "c a" 'eglot-code-actions
+	  "c d" 'xref-find-definitions
+          "c r" 'eglot-rename
+          "c u" 'xref-find-references
+          "c s" 'imenu
+          "c f" 'eglot-format-buffer
+          "c h" 'eldoc-box-help-at-point
 	  ";" 'comment-line
 
 	  ;; project commands
@@ -63,9 +66,8 @@
           "m p" 'sk/apply-macro-page
 
           ;; errors
-          "e f" 'flycheck-first-error
-          "e n" 'flycheck-next-error
-          "e p" 'flycheck-previous-error
+          "e n" 'flymake-goto-next-error
+          "e p" 'flymake-goto-prev-error
 
 	  ;; window commands
 	  "w d" 'delete-window

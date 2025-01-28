@@ -11,6 +11,7 @@ quelpa/
 eshell/
 tramp
 places
+eln-*/
 
 ## projectile
 projectile.cache

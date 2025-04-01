@@ -46,6 +46,7 @@ smex-items
 .cache/
 .lsp-session-v1
 eclipse.jdt.ls
+.dap-breakpoints
 workspace
 
 # tree-sitter

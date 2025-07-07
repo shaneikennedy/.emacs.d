@@ -383,12 +383,7 @@
   :init (doom-modeline-mode 1))
 
 (use-package typescript-mode)
-(use-package tsx-mode
-  :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30")
-  :defer t
-  :mode "\\.tsx\\'"
-  :custom
-  (tsx-mode-enable-css-in-js t))
+
 (use-package npm)
 
 (use-package dockerfile-mode
@@ -401,12 +396,49 @@
 (use-package terraform-mode)
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
 
 (use-package format-all)
 (add-hook 'go-mode-hook 'format-all-mode)
 (add-hook 'typescript-mode-hook 'format-all-mode)
 (add-hook 'tsx-mode-hook 'format-all-mode)
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+
+(setq treesit-language-source-alist
+'(
+    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (css "https://github.com/tree-sitter/tree-sitter-css")))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  ;; Enable YASnippet globally
+  (yas-global-mode 1)
+  :config
+  ;; Set snippet directories
+  (setq yas-snippet-dirs '("~/.emacs.d/yasnippet-go"))
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "C-c y") 'yas-expand)
+
+  ;; Integrate YASnippet with completion-at-point-functions
+  (defun my/yas-capf ()
+    "Add YASnippet completion to completion-at-point-functions with orderless support."
+    (when (bound-and-true-p yas-minor-mode)
+      (let ((completions (yas--get-snippets-as-capf)))
+        (when completions
+          (nconc completions '(:company-match #'orderless-try-completion))
+          completions))))
+
+  ;; Add YASnippet to completion-at-point-functions
+  (add-hook 'completion-at-point-functions #'my/yas-capf nil t))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet
+  :config
+  (yasnippet-snippets-initialize))
 
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)

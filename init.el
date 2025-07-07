@@ -338,6 +338,9 @@
   (interactive)
     (consult-line (word-at-point)))
 
+(straight-use-package
+  '(amp :type git :host github :repo "shaneikennedy/amp.el"))
+
 (use-package evil-collection
   :after evil
   :diminish

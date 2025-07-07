@@ -210,13 +210,7 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package treesit-auto
-  :config
-  (global-treesit-auto-mode))
-
-(use-package rust-mode
-  :init
-  (setq rust-mode-treesitter-derive t))
+(use-package rust-mode)
 
 (use-package rustic
   :config
@@ -278,32 +272,8 @@
 
 (use-package groovy-mode)
 
-(setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-(setq major-mode-remap-alist
- '((yaml-mode . yaml-ts-mode)
-   (bash-mode . bash-ts-mode)
-   (rust-mode . rust-ts-mode)
-   (js2-mode . js-ts-mode)
-   (typescript-mode . typescript-ts-mode)
-   (json-mode . json-ts-mode)
-   (css-mode . css-ts-mode)
-   (python-mode . python-ts-mode)))
+
 
 
 (use-package evil
@@ -410,11 +380,12 @@
   :init (doom-modeline-mode 1))
 
 (use-package typescript-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'"    . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'"    . tsx-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'"    . tsx-ts-mode))
-
+(use-package tsx-mode
+  :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30")
+  :defer t
+  :mode "\\.tsx\\'"
+  :custom
+  (tsx-mode-enable-css-in-js t))
 (use-package npm)
 
 (use-package dockerfile-mode
@@ -425,14 +396,13 @@
 (use-package toml-mode)
 (use-package protobuf-mode)
 (use-package terraform-mode)
-(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 (use-package format-all)
 (add-hook 'go-mode-hook 'format-all-mode)
-(add-hook 'typescript-ts-mode-hook 'format-all-mode)
-(add-hook 'tsx-ts-mode-hook 'format-all-mode)
-(add-hook 'rust-ts-mode-hook 'format-all-mode)
+(add-hook 'typescript-mode-hook 'format-all-mode)
+(add-hook 'tsx-mode-hook 'format-all-mode)
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 
 (diminish 'which-key-mode)

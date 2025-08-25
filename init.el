@@ -217,7 +217,7 @@
   (setq rustic-lsp-client 'eglot)
   :after (rust-mode))
 
-(load-theme 'leuven-dark)
+(load-theme 'gruvbox-dark-hard)
 
 (when (window-system)
   (tool-bar-mode -1)
@@ -330,9 +330,7 @@
   (evil-mode)
   )
 
-(use-package doom-themes
-  :init
-  (load-theme 'doom-bluloco-dark))
+(use-package doom-themes)
 
 (defun consult-line-at-point ()
   (interactive)

@@ -40,6 +40,7 @@
 ;; of munging of 'prettify-symbols-alist'.
 (ignore-errors (mac-auto-operator-composition-mode))
 
+(electric-pair-mode)
 (setq
  mac-option-key-is-meta nil
  mac-command-key-is-meta t

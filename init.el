@@ -396,6 +396,11 @@
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
 
+(straight-use-package
+ '(geist-font :type git :host github :repo "shaneikennedy/geist-font.el"))
+(geist-font--install)
+(ignore-errors (set-frame-font "Geist Mono-13"))
+
 (use-package format-all)
 (add-hook 'go-mode-hook 'format-all-mode)
 (add-hook 'typescript-mode-hook 'format-all-mode)

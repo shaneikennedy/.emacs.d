@@ -447,6 +447,8 @@
   :config
   (yasnippet-snippets-initialize))
 
+(add-to-list 'load-path (expand-file-name "./lisp" user-emacs-directory))
+(ignore-errors (require 'work))
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)
 (diminish 'evil-collection-unimpaired-mode)

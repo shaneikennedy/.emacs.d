@@ -81,6 +81,8 @@
 ;; Actual emacs packages to setup
 (use-package diminish)
 
+
+(use-package git-modes)
 (use-package magit
   :diminish magit-auto-revert-mode
   :diminish auto-revert-mode
@@ -110,8 +112,7 @@
 
 
 (ignore-errors
-  (set-frame-font "Hack Nerd Font Mono 13"))
-
+  (set-frame-font "Geist Mono-13"))
 
 (use-package zoom
   :diminish
@@ -393,6 +394,7 @@
 (use-package toml-mode)
 (use-package protobuf-mode)
 (use-package terraform-mode)
+(use-package yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))

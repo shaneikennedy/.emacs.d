@@ -219,6 +219,7 @@
   (setq rustic-lsp-client 'eglot)
   :after (rust-mode))
 
+(use-package gruvbox-theme)
 (load-theme 'gruvbox-dark-hard)
 
 (when (window-system)

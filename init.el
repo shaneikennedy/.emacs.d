@@ -221,6 +221,7 @@
 
 (use-package gruvbox-theme)
 (load-theme 'gruvbox-dark-hard)
+(set-cursor-color "yellow")
 
 (when (window-system)
   (tool-bar-mode -1)
@@ -449,6 +450,10 @@
 
 (add-to-list 'load-path (expand-file-name "./lisp" user-emacs-directory))
 (ignore-errors (require 'work))
+
+;; Useful in monorepos
+(add-to-list 'project-vc-extra-root-markers ".projectile")
+
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)
 (diminish 'evil-collection-unimpaired-mode)

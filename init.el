@@ -232,6 +232,10 @@
 (use-package deadgrep
   :bind (("C-c h" . deadgrep)))
 
+(use-package kkp
+  :config
+  (global-kkp-mode 1))
+
 (defun open-init-file ()
   "Open this very file."
   (interactive)

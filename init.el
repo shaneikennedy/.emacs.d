@@ -1,3 +1,6 @@
+(setq package-enable-at-startup nil)
+(setq straight-use-package-by-default t)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -14,7 +17,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq package-enable-at-startup nil)
 (straight-use-package 'use-package)
 
 ;; Configure package archives

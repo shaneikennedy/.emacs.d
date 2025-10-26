@@ -220,8 +220,8 @@
   :after (rust-mode))
 
 (use-package gruvbox-theme)
-(set-cursor-color "yellow")
 (load-theme 'modus-vivendi)
+(set-cursor-color "yellow")
 
 (when (window-system)
   (tool-bar-mode -1)

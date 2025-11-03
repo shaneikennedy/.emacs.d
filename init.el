@@ -347,6 +347,7 @@
  (evil-define-key 'normal 'global (kbd "<leader>gl") 'magit-log-buffer-file)
  (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
  (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
+ (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
   (progn
     ;; escape key should always escacpe
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -458,7 +459,6 @@
   (yas-global-mode 1)
   :config
   ;; Set snippet directories
-  (setq yas-snippet-dirs '("~/.emacs.d/yasnippet-go"))
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (define-key yas-minor-mode-map (kbd "C-c y") 'yas-expand)

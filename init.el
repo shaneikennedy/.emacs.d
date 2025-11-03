@@ -188,9 +188,13 @@
   (marginalia-mode))
 
 (use-package corfu
-  :custom
-  (corfu-auto t)
-  (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
+  :ensure t
+  :commands (corfu-mode global-corfu-mode)
+
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode)
+         (eshell-mode . corfu-mode))
+
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
@@ -199,8 +203,31 @@
         ("C-p" . corfu-previous)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous))
+  :custom
+  (tab-always-indent 'complete)
+  (corfu-auto t)
+  (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
+  (corfu-popupinfo-delay '(0.2 . 0.1))
+  (corfu-popupinfo-direction '(right left vertical))
+  (corfu-popupinfo-max-width 80)
+  (corfu-popupinfo-max-height 20)
+  (corfu-popupinfo-resize t)
+
+  ;; Enable Corfu
+  :config
+  (global-corfu-mode)
+  (corfu-popupinfo-mode))
+
+(use-package cape
+  :commands (cape-dabbrev cape-file cape-elisp-block)
+  :bind ("C-c p" . cape-prefix-map)
   :init
-  (global-corfu-mode))
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.
+  (add-hook 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
 (use-package orderless
   :custom

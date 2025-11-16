@@ -348,6 +348,7 @@
  (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
  (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
  (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
+ (evil-define-key 'normal 'global (kbd "<leader>T") 'shell)
   (progn
     ;; escape key should always escacpe
     (define-key evil-normal-state-map [escape] 'keyboard-quit)

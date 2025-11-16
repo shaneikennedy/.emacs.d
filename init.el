@@ -488,6 +488,10 @@
 ;; Useful in monorepos
 (add-to-list 'project-vc-extra-root-markers ".projectile")
 
+(use-package flycheck
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)
 (diminish 'evil-collection-unimpaired-mode)

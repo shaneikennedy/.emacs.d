@@ -106,13 +106,6 @@
   (split-window-right)
   (other-window 1))
 
-(use-package ellama
-  :init
-  (setopt ellama-auto-scroll t)
-  (require 'llm-github)
-  (setq llm-warn-on-nonfree nil))
-
-
 (ignore-errors
   (set-frame-font "Geist Mono-13"))
 

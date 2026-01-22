@@ -106,9 +106,6 @@
   (split-window-right)
   (other-window 1))
 
-(ignore-errors
-  (set-frame-font "Geist Mono-13"))
-
 (use-package zoom
   :diminish
   :config
@@ -185,7 +182,6 @@
   :commands (corfu-mode global-corfu-mode)
 
   :hook ((prog-mode . corfu-mode)
-         (shell-mode . corfu-mode)
          (eshell-mode . corfu-mode))
 
   :bind
@@ -341,7 +337,7 @@
  (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
  (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
  (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
- (evil-define-key 'normal 'global (kbd "<leader>T") 'shell)
+ (evil-define-key 'normal 'global (kbd "<leader>T") 'ansi-term)
   (progn
     ;; escape key should always escacpe
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -408,7 +404,11 @@
 
 
 (use-package go-mode)
-
+(use-package flycheck-golangci-lint
+  :hook (go-mode . flycheck-golangci-lint-setup)
+  :config
+  (flycheck-golangci-lint-tests t))
+(add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
@@ -432,7 +432,7 @@
 (straight-use-package
  '(geist-font :type git :host github :repo "shaneikennedy/geist-font.el"))
 (geist-font--install)
-(ignore-errors (set-frame-font "Geist Mono-13"))
+(ignore-errors (set-frame-font "Geist Mono-16"))
 
 (use-package format-all)
 (add-hook 'go-mode-hook 'format-all-mode)
@@ -484,6 +484,42 @@
 (use-package flycheck
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package nix-mode)
+
+
+(use-package inheritenv
+  :straight (:type git :host github :repo "purcell/inheritenv"))
+
+;; for eat terminal backend:
+(use-package eat
+  :straight (:type git
+                   :host codeberg
+                   :repo "akib/emacs-eat"
+                   :files ("*.el" ("term" "term/*.el") "*.texi"
+                           "*.ti" ("terminfo/e" "terminfo/e/*")
+                           ("terminfo/65" "terminfo/65/*")
+                           ("integration" "integration/*")
+                           (:exclude ".dir-locals.el" "*-tests.el"))))
+
+;; install claude-code.el, using :depth 1 to reduce download size:
+(use-package claude-code
+  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
+                   :files ("*.el" (:exclude "images/*")))
+  :bind-keymap
+  ("C-c c" . claude-code-command-map) ;; or your preferred key
+  ;; Optionally define a repeat map so that "M" will cycle thru Claude auto-accept/plan/confirm modes after invoking claude-code-cycle-mode / C-c M.
+  :bind
+  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode)))
+
+
+;; In your init.el or config
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
+
 
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)

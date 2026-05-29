@@ -230,13 +230,6 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package rust-mode)
-
-(use-package rustic
-  :config
-  (setq rustic-lsp-client 'eglot)
-  :after (rust-mode))
-
 (use-package gruvbox-theme)
 (load-theme 'modus-vivendi)
 (set-cursor-color "yellow")
@@ -452,7 +445,6 @@
 
   (defvar my/treesit-major-mode-remaps
     '((go go-mode go-ts-mode)
-      (rust rust-mode rust-ts-mode)
       (typescript typescript-mode typescript-ts-mode)
       (javascript js-mode js-ts-mode)
       (json js-json-mode json-ts-mode)
@@ -503,7 +495,7 @@
           (append
            `(("go\\.mod\\'" . ,(my/ts-mode-or-fallback 'gomod 'go-mod-ts-mode 'go-dot-mod-mode))
              ("\\.go\\'" . ,(my/ts-mode-or-fallback 'go 'go-ts-mode 'go-mode))
-             ("\\.rs\\'" . ,(my/ts-mode-or-fallback 'rust 'rust-ts-mode 'rust-mode))
+             ("\\.rs\\'" . ,(my/ts-mode-or-fallback 'rust 'rust-ts-mode 'fundamental-mode))
              ("\\.tsx\\'" . ,(my/ts-mode-or-fallback 'tsx 'tsx-ts-mode 'typescript-mode))
              ("\\.ts\\'" . ,(my/ts-mode-or-fallback 'typescript 'typescript-ts-mode 'typescript-mode))
              ("\\.jsx\\'" . ,(my/ts-mode-or-fallback 'javascript 'js-ts-mode 'js-mode))
@@ -527,7 +519,6 @@
   :hook ((go-ts-mode . eglot-ensure)
          (go-mode . eglot-ensure)
          (rust-ts-mode . eglot-ensure)
-         (rust-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure)
          (typescript-mode . eglot-ensure)
          (tsx-ts-mode . eglot-ensure)
@@ -579,7 +570,6 @@
   :config
   (setf (alist-get 'go-mode apheleia-mode-alist) 'goimports
         (alist-get 'go-ts-mode apheleia-mode-alist) 'goimports
-        (alist-get 'rust-mode apheleia-mode-alist) 'rustfmt
         (alist-get 'rust-ts-mode apheleia-mode-alist) 'rustfmt
         (alist-get 'typescript-mode apheleia-mode-alist) 'prettier
         (alist-get 'typescript-ts-mode apheleia-mode-alist) 'prettier
@@ -672,4 +662,3 @@
 (diminish 'dired-mode)
 (diminish 'all-the-icons-dired-mode)
 (diminish 'diff-hl-dired-mode)
-(diminish 'rustic-doc-mode)

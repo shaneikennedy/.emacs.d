@@ -573,6 +573,33 @@
 (use-package yaml-mode)
 (my/setup-tree-sitter-auto-modes)
 
+(use-package dotenv-mode)
+(use-package markdown-mode)
+
+(let ((json-mode (my/ts-mode-or-fallback 'json 'json-ts-mode 'json-mode))
+      (yaml-mode (my/ts-mode-or-fallback 'yaml 'yaml-ts-mode 'yaml-mode))
+      (bash-mode (my/ts-mode-or-fallback 'bash 'bash-ts-mode 'sh-mode)))
+  (dolist (entry
+           `((,(rx "/" ".github" "/" "workflows" "/" (+ any) ".y" (? "a") "ml" eos) . ,yaml-mode)
+             (,(rx "/" (or "docker-compose" "compose") ".y" (? "a") "ml" eos) . ,yaml-mode)
+             (,(rx "/" ".env" (? "." (+ any)) eos) . dotenv-mode)
+             (,(rx "/" ".envrc" eos) . ,bash-mode)
+             (,(rx "/" ".npmrc" eos) . conf-unix-mode)
+             (,(rx "/" ".prettierrc" eos) . ,json-mode)
+             (,(rx "/" ".prettierrc." (or "json" "jsonc") eos) . ,json-mode)
+             (,(rx "/" ".prettierrc." (or "yaml" "yml") eos) . ,yaml-mode)
+             (,(rx "/" ".eslintrc" eos) . ,json-mode)
+             (,(rx "/" ".eslintrc." (or "json" "jsonc") eos) . ,json-mode)
+             (,(rx "/" ".eslintrc." (or "yaml" "yml") eos) . ,yaml-mode)
+             (,(rx "/" ".babelrc" eos) . ,json-mode)
+             (,(rx "/" ".stylelintrc" eos) . ,json-mode)
+             (,(rx "/" (or "package" "package-lock" "tsconfig" "jsconfig" "deno" "biome") ".json" eos) . ,json-mode)
+             (,(rx "/" (or ".bashrc" ".bash_profile" ".bash_login" ".profile") eos) . ,bash-mode)
+             (,(rx "/" ".zshrc" eos) . sh-mode)
+             (,(rx "." (or "sh" "bash") eos) . ,bash-mode)
+             (,(rx "." (or "md" "markdown") eos) . markdown-mode)))
+    (add-to-list 'auto-mode-alist entry)))
+
 (straight-use-package
  '(geist-font :type git :host github :repo "shaneikennedy/geist-font.el"))
 (geist-font--install)

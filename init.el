@@ -220,24 +220,11 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-(use-package modus-themes
-  :custom
-  (modus-themes-bold-constructs t)
-  (modus-themes-italic-constructs t)
-  (modus-themes-completions '((matches . (extrabold))
-                              (selection . (semibold accented))
-                              (popup . (accented))))
-  (modus-themes-prompts '(bold intense))
-  (modus-themes-region '(bg-only no-extend))
-  (modus-themes-headings '((1 . (variable-pitch 1.4))
-                           (2 . (variable-pitch 1.25))
-                           (agenda-date . (1.3))
-                           (agenda-structure . (variable-pitch light 1.8))
-                           (t . (semibold))))
+(use-package ef-themes
   :config
-  (load-theme 'modus-vivendi t)
-  (set-cursor-color (or (face-attribute 'warning :foreground nil t)
-                        (face-attribute 'cursor :background nil t))))
+  (load-theme 'ef-elea-dark t)
+  (add-to-list 'default-frame-alist '(cursor-color . "#f0a070"))
+  (set-cursor-color "#f0a070"))
 
 (use-package spacious-padding
   :custom

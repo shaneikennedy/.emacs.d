@@ -518,6 +518,7 @@
   :commands (eglot eglot-ensure)
   :hook ((go-ts-mode . eglot-ensure)
          (go-mode . eglot-ensure)
+         (go-mod-ts-mode . eglot-ensure)
          (rust-ts-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure)
          (typescript-mode . eglot-ensure)
@@ -525,7 +526,10 @@
          (js-ts-mode . eglot-ensure)
          (js-mode . eglot-ensure))
   :custom
-  (eglot-autoshutdown t))
+  (eglot-autoshutdown t)
+  :config
+  (add-to-list 'eglot-server-programs
+               '((go-mode go-ts-mode go-mod-ts-mode) . ("gopls"))))
 
 (use-package flymake
   :ensure nil

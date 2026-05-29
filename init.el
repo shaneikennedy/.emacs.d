@@ -118,12 +118,11 @@
   ("M-o" . ace-window)
   :config
   (set-face-attribute 'aw-leading-char-face nil
-                      :foreground "deep sky blue"
+                      :inherit 'warning
                       :weight 'bold
-                      :height 2.0)
+                      :height 1.8)
   (set-face-attribute 'aw-mode-line-face nil
-                      :inherit 'mode-line-buffer-id
-                      :foreground "lawn green")
+                      :inherit 'mode-line-emphasis)
   (setq aw-scope 'frame)
   (setq aw-dispatch-always t)
   (setq aw-keys '(?q ?w ?e ?r ?a ?s ?d ?f))
@@ -182,6 +181,8 @@
 (use-package corfu
   :ensure t
   :commands (corfu-mode global-corfu-mode)
+  :init
+  (global-corfu-mode)
 
   :hook ((prog-mode . corfu-mode)
          (eshell-mode . corfu-mode))
@@ -206,7 +207,6 @@
 
   ;; Enable Corfu
   :config
-  (global-corfu-mode)
   (corfu-popupinfo-mode))
 
 (use-package cape
@@ -226,15 +226,43 @@
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-(use-package kind-icon
-  :ensure t
+(use-package nerd-icons)
+
+(use-package nerd-icons-corfu
   :after corfu
   :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-(use-package gruvbox-theme)
-(load-theme 'modus-vivendi)
-(set-cursor-color "yellow")
+(use-package modus-themes
+  :custom
+  (modus-themes-bold-constructs t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-completions '((matches . (extrabold))
+                              (selection . (semibold accented))
+                              (popup . (accented))))
+  (modus-themes-prompts '(bold intense))
+  (modus-themes-region '(bg-only no-extend))
+  (modus-themes-headings '((1 . (variable-pitch 1.4))
+                           (2 . (variable-pitch 1.25))
+                           (agenda-date . (1.3))
+                           (agenda-structure . (variable-pitch light 1.8))
+                           (t . (semibold))))
+  :config
+  (load-theme 'modus-vivendi t)
+  (set-cursor-color (or (face-attribute 'warning :foreground nil t)
+                        (face-attribute 'cursor :background nil t))))
+
+(use-package spacious-padding
+  :custom
+  (spacious-padding-widths
+   '(:internal-border-width 12
+     :header-line-width 4
+     :mode-line-width 4
+     :tab-width 4
+     :right-divider-width 8
+     :scroll-bar-width 8))
+  :config
+  (spacious-padding-mode 1))
 
 (when (window-system)
   (tool-bar-mode -1)
@@ -260,16 +288,17 @@
   :ensure t
   :config
   (recentf-mode 1)
-  (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo
-        dashboard-center-content t
+  (setq dashboard-startup-banner nil
+        dashboard-center-content nil
         dashboard-items '((recents  . 5)
-                          (projects . 10))
-        dashboard-set-footer nil))
+                          (projects . 5))
+        dashboard-set-footer nil
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t)
+  (dashboard-setup-startup-hook))
 
-(use-package all-the-icons)
-(use-package all-the-icons-dired)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package drag-stuff
@@ -355,8 +384,6 @@
   (evil-mode)
   )
 
-(use-package doom-themes)
-
 (defun consult-line-at-point ()
   (interactive)
     (consult-line (word-at-point)))
@@ -395,7 +422,7 @@
           (lambda()
             (local-unset-key (kbd "SPC"))))
 
-(add-hook 'all-the-icons-dired-mode-hook
+(add-hook 'nerd-icons-dired-mode-hook
           (lambda()
             (local-unset-key (kbd "SPC"))))
 
@@ -559,7 +586,20 @@
 (add-hook 'go-ts-mode-hook (lambda () (setq tab-width 4)))
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :custom
+  (doom-modeline-height 24)
+  (doom-modeline-bar-width 3)
+  (doom-modeline-buffer-file-name-style 'truncate-with-project)
+  (doom-modeline-project-detection 'project)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-buffer-state-icon nil)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-enable-word-count nil)
+  (doom-modeline-vcs-max-length 24)
+  (doom-modeline-lsp t)
+  :init
+  (doom-modeline-mode 1))
 
 (use-package typescript-mode)
 
@@ -704,5 +744,5 @@
 (diminish 'eldoc-mode)
 (diminish 'evil-collection-unimpaired-mode)
 (diminish 'dired-mode)
-(diminish 'all-the-icons-dired-mode)
+(diminish 'nerd-icons-dired-mode)
 (diminish 'diff-hl-dired-mode)

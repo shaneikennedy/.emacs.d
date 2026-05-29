@@ -524,12 +524,20 @@
          (typescript-mode . eglot-ensure)
          (tsx-ts-mode . eglot-ensure)
          (js-ts-mode . eglot-ensure)
-         (js-mode . eglot-ensure))
+         (js-mode . eglot-ensure)
+         (json-ts-mode . eglot-ensure)
+         (json-mode . eglot-ensure))
   :custom
   (eglot-autoshutdown t)
   :config
   (add-to-list 'eglot-server-programs
-               '((go-mode go-ts-mode go-mod-ts-mode) . ("gopls"))))
+               '((go-mode go-ts-mode go-mod-ts-mode) . ("gopls")))
+  (add-to-list 'eglot-server-programs
+               '((typescript-ts-mode typescript-mode tsx-ts-mode js-ts-mode js-mode)
+                 . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '((json-ts-mode json-mode)
+                 . ("vscode-json-language-server" "--stdio"))))
 
 (use-package flymake
   :ensure nil

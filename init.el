@@ -34,7 +34,9 @@
 (global-hl-line-mode t)              ; Always highlight the current line.
 (show-paren-mode t)                  ; And point out matching parentheses.
 (delete-selection-mode t)            ; Behave like any other sensible text editor would.
-(global-display-line-numbers-mode)   ; Emacs has this builtin now, it's fast
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'conf-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
 (save-place-mode)                    ; Remember where I was
 
 ;; Make sure that ligatures from fonts that offer them are enabled.
@@ -257,6 +259,7 @@
 (use-package dashboard
   :ensure t
   :config
+  (recentf-mode 1)
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo
         dashboard-center-content t
@@ -267,7 +270,7 @@
 (use-package all-the-icons)
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(add-hook 'dired-mode-hook (lambda() 'dired-hide-details-mode 1))
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package drag-stuff
   :ensure t
@@ -602,7 +605,9 @@
 
 (straight-use-package
  '(geist-font :type git :host github :repo "shaneikennedy/geist-font.el"))
-(geist-font--install)
+(require 'geist-font)
+(unless (geist-font--geist-fonts-exist-p)
+  (geist-font--install))
 (ignore-errors (set-frame-font "Geist Mono-16"))
 
 (use-package apheleia

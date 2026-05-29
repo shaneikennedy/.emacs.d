@@ -336,6 +336,7 @@
  (evil-define-key 'normal 'global (kbd "<leader>gl") 'magit-log-buffer-file)
  (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
  (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
+ (evil-define-key 'normal 'global (kbd "<leader>el") 'consult-flymake)
  (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
  (evil-define-key 'normal 'global (kbd "<leader>T") 'ansi-term)
   (progn
@@ -535,14 +536,22 @@
   :custom
   (eglot-autoshutdown t))
 
+(use-package flymake
+  :ensure nil
+  :straight nil
+  :commands (flymake-goto-next-error
+             flymake-goto-prev-error
+             flymake-show-buffer-diagnostics
+             flymake-show-project-diagnostics)
+  :custom
+  (flymake-no-changes-timeout 0.5)
+  (flymake-start-on-save-buffer t)
+  (flymake-start-on-flymake-mode t))
+
 (use-package go-mode)
-(use-package flycheck-golangci-lint
-  :hook ((go-mode . flycheck-golangci-lint-setup)
-         (go-ts-mode . flycheck-golangci-lint-setup))
-  :config
-  (setq flycheck-golangci-lint-tests t))
 (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
 (add-hook 'go-ts-mode-hook (lambda () (setq tab-width 4)))
+
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
@@ -613,10 +622,6 @@
 
 ;; Useful in monorepos
 (add-to-list 'project-vc-extra-root-markers ".projectile")
-
-(use-package flycheck
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package nix-mode)
 

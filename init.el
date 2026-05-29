@@ -1,4 +1,3 @@
-(setq package-enable-at-startup nil)
 (setq straight-use-package-by-default t)
 
 (defvar bootstrap-version)
@@ -19,13 +18,6 @@
 
 (straight-use-package 'use-package)
 
-;; Configure package archives
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")
-        ("nongnu" . "https://elpa.nongnu.org/packages/")))
-
-(setq use-package-always-ensure t)
 ;; Quality of life defaults
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -79,7 +71,6 @@
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
 (use-package exec-path-from-shell
-  :ensure t
   :config
   (exec-path-from-shell-initialize))
 ;; Actual emacs packages to setup
@@ -132,23 +123,22 @@
 
 
 (use-package eldoc-box
-  :diminish
-  :ensure t)
+  :diminish)
 
 ;; Enable Vertico.
 (use-package vertico
-  :ensure t
   :init
   (vertico-mode))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :ensure t
+  :straight nil
   :init
   (savehist-mode))
 
 ;; Emacs minibuffer configurations.
 (use-package emacs
+  :straight nil
   :custom
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
@@ -164,7 +154,6 @@
    '(read-only t cursor-intangible t face minibuffer-prompt)))
 
 (use-package consult
-  :ensure t
    :hook (completion-list-mode . consult-preview-at-point-mode)
    :custom
    (consult-preview-key nil)
@@ -174,12 +163,10 @@
  )
 
 (use-package marginalia
-  :ensure t
   :init
   (marginalia-mode))
 
 (use-package corfu
-  :ensure t
   :commands (corfu-mode global-corfu-mode)
   :init
   (global-corfu-mode)
@@ -285,10 +272,16 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package dashboard
-  :ensure t
   :config
   (recentf-mode 1)
-  (setq dashboard-startup-banner nil
+  (defvar my/dashboard-empty-banner
+    (let ((file (expand-file-name "emacs-dashboard-empty-banner.txt"
+                                  temporary-file-directory)))
+      (unless (file-exists-p file)
+        (with-temp-file file))
+      file)
+    "Empty text banner used to keep Dashboard visually minimal.")
+  (setq dashboard-startup-banner my/dashboard-empty-banner
         dashboard-center-content nil
         dashboard-items '((recents  . 5)
                           (projects . 5))
@@ -302,13 +295,11 @@
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package drag-stuff
-  :ensure t
   :bind* (("C-M-p" . drag-stuff-up)
           ("C-M-n" . drag-stuff-down)))
 
 
 (use-package diff-hl
-  :ensure t
   :demand t
   :config
   (diff-hl-flydiff-mode +1)
@@ -318,7 +309,6 @@
 
 
 (use-package rainbow-delimiters
-  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package groovy-mode)
@@ -328,7 +318,6 @@
 
 
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
@@ -606,7 +595,7 @@
 (use-package npm)
 
 (use-package dockerfile-mode
-  :ensure t)
+  :defer t)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 (use-package jenkinsfile-mode)
@@ -670,7 +659,6 @@
   (apheleia-global-mode +1))
 
 (use-package yasnippet
-  :ensure t
   :init
   ;; Enable YASnippet globally
   (yas-global-mode 1)
@@ -693,7 +681,6 @@
   (add-hook 'completion-at-point-functions #'my/yas-capf nil t))
 
 (use-package yasnippet-snippets
-  :ensure t
   :after yasnippet
   :config
   (yasnippet-snippets-initialize))
@@ -734,7 +721,6 @@
 
 ;; In your init.el or config
 (use-package direnv
-  :ensure t
   :config
   (direnv-mode))
 

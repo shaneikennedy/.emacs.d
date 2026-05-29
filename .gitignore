@@ -7,6 +7,10 @@ auto-save-list
 *~
 \#*\#
 elpa/
+straight/*
+!straight/versions/
+straight/versions/*
+!straight/versions/default.el
 quelpa/
 eshell/
 tramp

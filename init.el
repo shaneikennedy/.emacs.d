@@ -575,18 +575,25 @@
 (geist-font--install)
 (ignore-errors (set-frame-font "Geist Mono-16"))
 
-(use-package format-all)
-(add-hook 'go-mode-hook 'format-all-mode)
-(add-hook 'go-ts-mode-hook 'format-all-mode)
-(add-hook 'rust-ts-mode-hook 'format-all-mode)
-(add-hook 'typescript-mode-hook 'format-all-mode)
-(add-hook 'typescript-ts-mode-hook 'format-all-mode)
-(add-hook 'tsx-ts-mode-hook 'format-all-mode)
-(add-hook 'js-ts-mode-hook 'format-all-mode)
-(add-hook 'json-ts-mode-hook 'format-all-mode)
-(add-hook 'yaml-ts-mode-hook 'format-all-mode)
-(add-hook 'toml-ts-mode-hook 'format-all-mode)
-(add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+(use-package apheleia
+  :config
+  (setf (alist-get 'go-mode apheleia-mode-alist) 'goimports
+        (alist-get 'go-ts-mode apheleia-mode-alist) 'goimports
+        (alist-get 'rust-mode apheleia-mode-alist) 'rustfmt
+        (alist-get 'rust-ts-mode apheleia-mode-alist) 'rustfmt
+        (alist-get 'typescript-mode apheleia-mode-alist) 'prettier
+        (alist-get 'typescript-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'tsx-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'js-mode apheleia-mode-alist) 'prettier
+        (alist-get 'js-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'json-mode apheleia-mode-alist) 'prettier
+        (alist-get 'json-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'yaml-mode apheleia-mode-alist) 'prettier
+        (alist-get 'yaml-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'css-mode apheleia-mode-alist) 'prettier
+        (alist-get 'css-ts-mode apheleia-mode-alist) 'prettier
+        (alist-get 'terraform-mode apheleia-mode-alist) 'terraform)
+  (apheleia-global-mode +1))
 
 (use-package yasnippet
   :ensure t

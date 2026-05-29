@@ -403,12 +403,146 @@
             (local-unset-key (kbd "SPC"))))
 
 
+(use-package treesit
+  :ensure nil
+  :straight nil
+  :custom
+  (treesit-extra-load-path
+   (list (expand-file-name "tree-sitter" user-emacs-directory)))
+  (treesit-font-lock-level 4)
+  :config
+  (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+  (defvar my/treesit-language-grammars
+    '(bash css dockerfile go gomod html javascript json rust toml tsx typescript yaml)
+    "Tree-sitter grammars expected by this config.")
+
+  (defun my/treesit-missing-grammars ()
+    "Return configured Tree-sitter grammars that are not installed."
+    (seq-remove #'treesit-language-available-p my/treesit-language-grammars))
+
+  (defun my/treesit-language-ready-p (language)
+    "Return non-nil when LANGUAGE has an installed Tree-sitter grammar."
+    (and (treesit-available-p)
+         (treesit-language-available-p language)))
+
+  (defun my/treesit-install-missing-grammars ()
+    "Install missing Tree-sitter grammars used by this config."
+    (interactive)
+    (unless (treesit-available-p)
+      (user-error "This Emacs was not built with Tree-sitter support"))
+    (dolist (language (my/treesit-missing-grammars))
+      (treesit-install-language-grammar language))
+    (my/setup-tree-sitter-major-mode-remaps)
+    (my/setup-tree-sitter-auto-modes))
+
+  (defvar my/treesit-major-mode-remaps
+    '((go go-mode go-ts-mode)
+      (rust rust-mode rust-ts-mode)
+      (typescript typescript-mode typescript-ts-mode)
+      (javascript js-mode js-ts-mode)
+      (json js-json-mode json-ts-mode)
+      (json json-mode json-ts-mode)
+      (yaml yaml-mode yaml-ts-mode)
+      (toml toml-mode toml-ts-mode)
+      (bash sh-mode bash-ts-mode)
+      (css css-mode css-ts-mode)
+      (html html-mode html-ts-mode)
+      (dockerfile dockerfile-mode dockerfile-ts-mode))
+    "Legacy major modes to remap when their Tree-sitter grammar is installed.")
+
+  (defun my/remap-major-mode (language from to)
+    "Use TO as the Tree-sitter replacement for FROM when LANGUAGE is ready."
+    (when (and (fboundp to)
+               (my/treesit-language-ready-p language))
+      (add-to-list 'major-mode-remap-alist (cons from to))))
+
+  (defun my/setup-tree-sitter-major-mode-remaps ()
+    "Prefer Tree-sitter modes when their grammars are installed."
+    (let ((legacy-modes (mapcar #'cadr my/treesit-major-mode-remaps)))
+      (setq major-mode-remap-alist
+            (seq-remove
+             (lambda (entry)
+               (member (car-safe entry) legacy-modes))
+             major-mode-remap-alist)))
+    (dolist (remap my/treesit-major-mode-remaps)
+      (apply #'my/remap-major-mode remap)))
+
+  (my/setup-tree-sitter-major-mode-remaps)
+
+  (defun my/ts-mode-or-fallback (language ts-mode fallback-mode)
+    "Return TS-MODE when LANGUAGE is installed, otherwise FALLBACK-MODE."
+    (if (and (fboundp ts-mode)
+             (my/treesit-language-ready-p language))
+        ts-mode
+      fallback-mode))
+
+  (defvar my/treesit-auto-mode-regexps
+    '("go\\.mod\\'" "\\.go\\'" "\\.rs\\'" "\\.tsx\\'" "\\.ts\\'"
+      "\\.jsx\\'" "\\.mjs\\'" "\\.cjs\\'" "\\.js\\'" "\\.avsc\\'"
+      "\\.json\\'" "\\.ya?ml\\'" "\\.toml\\'" "Dockerfile\\'")
+    "File patterns owned by the Tree-sitter mode setup.")
+
+  (defun my/setup-tree-sitter-auto-modes ()
+    "Prefer Tree-sitter modes for files this config handles."
+    (setq auto-mode-alist
+          (append
+           `(("go\\.mod\\'" . ,(my/ts-mode-or-fallback 'gomod 'go-mod-ts-mode 'go-dot-mod-mode))
+             ("\\.go\\'" . ,(my/ts-mode-or-fallback 'go 'go-ts-mode 'go-mode))
+             ("\\.rs\\'" . ,(my/ts-mode-or-fallback 'rust 'rust-ts-mode 'rust-mode))
+             ("\\.tsx\\'" . ,(my/ts-mode-or-fallback 'tsx 'tsx-ts-mode 'typescript-mode))
+             ("\\.ts\\'" . ,(my/ts-mode-or-fallback 'typescript 'typescript-ts-mode 'typescript-mode))
+             ("\\.jsx\\'" . ,(my/ts-mode-or-fallback 'javascript 'js-ts-mode 'js-mode))
+             ("\\.mjs\\'" . ,(my/ts-mode-or-fallback 'javascript 'js-ts-mode 'js-mode))
+             ("\\.cjs\\'" . ,(my/ts-mode-or-fallback 'javascript 'js-ts-mode 'js-mode))
+             ("\\.js\\'" . ,(my/ts-mode-or-fallback 'javascript 'js-ts-mode 'js-mode))
+             ("\\.avsc\\'" . ,(my/ts-mode-or-fallback 'json 'json-ts-mode 'json-mode))
+             ("\\.json\\'" . ,(my/ts-mode-or-fallback 'json 'json-ts-mode 'json-mode))
+             ("\\.ya?ml\\'" . ,(my/ts-mode-or-fallback 'yaml 'yaml-ts-mode 'yaml-mode))
+             ("\\.toml\\'" . ,(my/ts-mode-or-fallback 'toml 'toml-ts-mode 'toml-mode))
+             ("Dockerfile\\'" . ,(my/ts-mode-or-fallback 'dockerfile 'dockerfile-ts-mode 'dockerfile-mode)))
+           (seq-remove
+            (lambda (entry)
+              (member (car-safe entry) my/treesit-auto-mode-regexps))
+            auto-mode-alist)))))
+
+(use-package eglot
+  :ensure nil
+  :straight nil
+  :commands (eglot eglot-ensure)
+  :hook ((go-ts-mode . eglot-ensure)
+         (go-mode . eglot-ensure)
+         (rust-ts-mode . eglot-ensure)
+         (rust-mode . eglot-ensure)
+         (typescript-ts-mode . eglot-ensure)
+         (typescript-mode . eglot-ensure)
+         (tsx-ts-mode . eglot-ensure)
+         (js-ts-mode . eglot-ensure)
+         (js-mode . eglot-ensure))
+  :custom
+  (eglot-autoshutdown t))
+
 (use-package go-mode)
 (use-package flycheck-golangci-lint
-  :hook (go-mode . flycheck-golangci-lint-setup)
+  :hook ((go-mode . flycheck-golangci-lint-setup)
+         (go-ts-mode . flycheck-golangci-lint-setup))
   :config
-  (flycheck-golangci-lint-tests t))
+  (setq flycheck-golangci-lint-tests t))
 (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
+(add-hook 'go-ts-mode-hook (lambda () (setq tab-width 4)))
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
@@ -425,9 +559,7 @@
 (use-package protobuf-mode)
 (use-package terraform-mode)
 (use-package yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
+(my/setup-tree-sitter-auto-modes)
 
 (straight-use-package
  '(geist-font :type git :host github :repo "shaneikennedy/geist-font.el"))
@@ -436,15 +568,16 @@
 
 (use-package format-all)
 (add-hook 'go-mode-hook 'format-all-mode)
+(add-hook 'go-ts-mode-hook 'format-all-mode)
+(add-hook 'rust-ts-mode-hook 'format-all-mode)
 (add-hook 'typescript-mode-hook 'format-all-mode)
-(add-hook 'tsx-mode-hook 'format-all-mode)
+(add-hook 'typescript-ts-mode-hook 'format-all-mode)
+(add-hook 'tsx-ts-mode-hook 'format-all-mode)
+(add-hook 'js-ts-mode-hook 'format-all-mode)
+(add-hook 'json-ts-mode-hook 'format-all-mode)
+(add-hook 'yaml-ts-mode-hook 'format-all-mode)
+(add-hook 'toml-ts-mode-hook 'format-all-mode)
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-
-(setq treesit-language-source-alist
-'(
-    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (css "https://github.com/tree-sitter/tree-sitter-css")))
 
 (use-package yasnippet
   :ensure t

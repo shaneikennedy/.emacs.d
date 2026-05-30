@@ -122,9 +122,6 @@
   (ace-window-display-mode t))
 
 
-(use-package eldoc-box
-  :diminish)
-
 ;; Enable Vertico.
 (use-package vertico
   :init
@@ -154,13 +151,13 @@
    '(read-only t cursor-intangible t face minibuffer-prompt)))
 
 (use-package consult
-   :hook (completion-list-mode . consult-preview-at-point-mode)
-   :custom
-   (consult-preview-key nil)
-   (consult-narrow-key nil)
-   :config
-   (consult-customize consult-theme consult-line consult-line-at-point :preview-key '(:debounce 0.2 any))
- )
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :custom
+  (consult-preview-key nil)
+  (consult-narrow-key nil)
+  :config
+  (consult-customize consult-theme consult-line consult-line-at-point :preview-key '(:debounce 0.2 any))
+  )
 
 (use-package marginalia
   :init
@@ -230,11 +227,11 @@
   :custom
   (spacious-padding-widths
    '(:internal-border-width 12
-     :header-line-width 4
-     :mode-line-width 4
-     :tab-width 4
-     :right-divider-width 8
-     :scroll-bar-width 8))
+			    :header-line-width 4
+			    :mode-line-width 4
+			    :tab-width 4
+			    :right-divider-width 8
+			    :scroll-bar-width 8))
   :config
   (spacious-padding-mode 1))
 
@@ -309,37 +306,36 @@
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
- (evil-set-leader 'normal (kbd "SPC"))
- (evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
- (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
- (evil-define-key 'normal 'global (kbd "<leader>wn") 'split-right-and-enter)
- (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'ace-window)
- (evil-define-key 'normal 'global (kbd "<leader>wd") 'delete-window)
- (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows)
- (evil-define-key 'normal 'global (kbd "<leader>b") 'consult-buffer)
- (evil-define-key 'normal 'global (kbd "<leader>fs") 'consult-line)
- (evil-define-key 'normal 'global (kbd "<leader>fS") 'consult-line-at-point)
- (evil-define-key 'normal 'global (kbd "<leader>pp") 'project-switch-project)
- (evil-define-key 'normal 'global (kbd "<leader>pr") 'consult-ripgrep)
- (evil-define-key 'normal 'global (kbd "<leader>pR") 'deadgrep)
- (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-fd)
- (evil-define-key 'normal 'global (kbd "<leader>;") 'comment-line)
- (evil-define-key 'normal 'global (kbd "<leader>ca") 'eglot-code-actions)
- (evil-define-key 'normal 'global (kbd "<leader>cd") 'xref-find-definitions)
- (evil-define-key 'normal 'global (kbd "<leader>cu") 'xref-find-references)
- (evil-define-key 'normal 'global (kbd "<leader>cr") 'eglot-rename)
- (evil-define-key 'normal 'global (kbd "<leader>ch") 'eldoc-box-help-at-point)
- (evil-define-key 'normal 'global (kbd "<leader>lc") 'ellama-chat)
- (evil-define-key 'normal 'global (kbd "<leader>ll") 'ellama)
- (evil-define-key 'normal 'global (kbd "<leader>gs") 'magit-status)
- (evil-define-key 'normal 'global (kbd "<leader>gc") 'magit-checkout)
- (evil-define-key 'normal 'global (kbd "<leader>gb") 'magit-blame)
- (evil-define-key 'normal 'global (kbd "<leader>gl") 'magit-log-buffer-file)
- (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
- (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
- (evil-define-key 'normal 'global (kbd "<leader>el") 'consult-flymake)
- (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
- (evil-define-key 'normal 'global (kbd "<leader>T") 'ansi-term)
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
+  (evil-define-key 'normal 'global (kbd "<leader>wn") 'split-right-and-enter)
+  (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'ace-window)
+  (evil-define-key 'normal 'global (kbd "<leader>wd") 'delete-window)
+  (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows)
+  (evil-define-key 'normal 'global (kbd "<leader>b") 'consult-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>fs") 'consult-line)
+  (evil-define-key 'normal 'global (kbd "<leader>fS") 'consult-line-at-point)
+  (evil-define-key 'normal 'global (kbd "<leader>pp") 'project-switch-project)
+  (evil-define-key 'normal 'global (kbd "<leader>pr") 'consult-ripgrep)
+  (evil-define-key 'normal 'global (kbd "<leader>pR") 'deadgrep)
+  (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-fd)
+  (evil-define-key 'normal 'global (kbd "<leader>;") 'comment-line)
+  (evil-define-key 'normal 'global (kbd "<leader>ca") 'eglot-code-actions)
+  (evil-define-key 'normal 'global (kbd "<leader>cd") 'xref-find-definitions)
+  (evil-define-key 'normal 'global (kbd "<leader>cu") 'xref-find-references)
+  (evil-define-key 'normal 'global (kbd "<leader>cr") 'eglot-rename)
+  (evil-define-key 'normal 'global (kbd "<leader>lc") 'ellama-chat)
+  (evil-define-key 'normal 'global (kbd "<leader>ll") 'ellama)
+  (evil-define-key 'normal 'global (kbd "<leader>gs") 'magit-status)
+  (evil-define-key 'normal 'global (kbd "<leader>gc") 'magit-checkout)
+  (evil-define-key 'normal 'global (kbd "<leader>gb") 'magit-blame)
+  (evil-define-key 'normal 'global (kbd "<leader>gl") 'magit-log-buffer-file)
+  (evil-define-key 'normal 'global (kbd "<leader>en") 'flymake-goto-next-error)
+  (evil-define-key 'normal 'global (kbd "<leader>ep") 'flymake-goto-prev-error)
+  (evil-define-key 'normal 'global (kbd "<leader>el") 'consult-flymake)
+  (evil-define-key 'normal 'global (kbd "<leader>s") 'yas-insert-snippet)
+  (evil-define-key 'normal 'global (kbd "<leader>T") 'ansi-term)
   (progn
     ;; escape key should always escacpe
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -362,10 +358,10 @@
 
 (defun consult-line-at-point ()
   (interactive)
-    (consult-line (word-at-point)))
+  (consult-line (word-at-point)))
 
 (straight-use-package
-  '(amp :type git :host github :repo "shaneikennedy/amp.el"))
+ '(amp :type git :host github :repo "shaneikennedy/amp.el"))
 
 (use-package evil-collection
   :after evil
@@ -624,7 +620,7 @@
 (require 'geist-font)
 (unless (geist-font--geist-fonts-exist-p)
   (geist-font--install))
-(ignore-errors (set-frame-font "Geist Mono-16"))
+(ignore-errors (set-frame-font "Geist Mono-13"))
 
 (use-package apheleia
   :config
@@ -707,9 +703,9 @@
 
 
 ;; In your init.el or config
-(use-package direnv
-  :config
-  (direnv-mode))
+;; (use-package direnv
+;;   :config
+;;   (direnv-mode))
 
 
 

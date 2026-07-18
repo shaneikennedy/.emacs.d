@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (setq straight-use-package-by-default t)
 
 (defvar bootstrap-version)
@@ -77,6 +78,15 @@
 (use-package diminish)
 
 
+
+(use-package pierre-themes
+  :straight (:host github
+		   :repo "shaneikennedy/pierre-themes.el"
+		   :files ("*.el"))
+  :config
+  ;; Theme names use hyphens, not spaces.
+  (load-theme 'pierre-dark t))
+
 (use-package git-modes)
 (use-package magit
   :diminish magit-auto-revert-mode
@@ -142,6 +152,8 @@
   (tab-always-indent 'complete)
   ;; Support opening new minibuffers from inside existing minibuffers.
   (enable-recursive-minibuffers t)
+  ;; Open selected directories in Dired instead of reporting an error.
+  (find-file-run-dired t)
   ;; Hide commands in M-x which do not work in the current mode.  Vertico
   ;; commands are hidden in normal buffers. This setting is useful beyond
   ;; Vertico.
@@ -216,12 +228,6 @@
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
-(use-package ef-themes
-  :config
-  (load-theme 'ef-elea-dark t)
-  (add-to-list 'default-frame-alist '(cursor-color . "#f0a070"))
-  (set-cursor-color "#f0a070"))
 
 (use-package spacious-padding
   :custom
@@ -514,6 +520,14 @@
               (member (car-safe entry) my/treesit-auto-mode-regexps))
             auto-mode-alist)))))
 
+(unless (fboundp 'eglot--builtin-mdown-p)
+  ;; Work around Emacs 31 snapshots where Eglot's defcustom calls this before
+  ;; Eglot defines it.  Eglot replaces this shim with its own definition later.
+  (defun eglot--builtin-mdown-p ()
+    (and (fboundp 'markdown-ts-view-mode)
+         (fboundp 'treesit-grammar-location)
+         (treesit-grammar-location 'markdown))))
+
 (use-package eglot
   :ensure nil
   :straight nil
@@ -703,11 +717,12 @@
 
 
 ;; In your init.el or config
-;; (use-package direnv
-;;   :config
-;;   (direnv-mode))
+(use-package direnv
+  :config
+  (direnv-mode))
 
-
+(use-package ghostel
+  :config (ghostel-download-module))
 
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)

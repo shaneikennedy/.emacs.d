@@ -723,7 +723,9 @@
   (direnv-mode))
 
 (use-package ghostel
-  :config (ghostel-download-module))
+  :custom
+  ;; Ghostel checks for the module on first use and downloads only if missing.
+  (ghostel-module-auto-install 'download))
 
 (diminish 'which-key-mode)
 (diminish 'eldoc-mode)

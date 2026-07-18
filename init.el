@@ -328,6 +328,7 @@
   (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-fd)
   (evil-define-key 'normal 'global (kbd "<leader>;") 'comment-line)
   (evil-define-key 'normal 'global (kbd "<leader>ca") 'eglot-code-actions)
+  (evil-define-key 'normal 'global (kbd "<leader>ch") 'display-local-help)
   (evil-define-key 'normal 'global (kbd "<leader>cd") 'xref-find-definitions)
   (evil-define-key 'normal 'global (kbd "<leader>cu") 'xref-find-references)
   (evil-define-key 'normal 'global (kbd "<leader>cr") 'eglot-rename)

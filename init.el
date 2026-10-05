@@ -313,6 +313,7 @@
   (setq evil-want-keybinding nil)
   :config
   (evil-set-leader 'normal (kbd "SPC"))
+  (evil-set-leader 'visual (kbd "SPC"))
   (evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
   (evil-define-key 'normal 'global (kbd "<leader>wn") 'split-right-and-enter)
@@ -326,6 +327,7 @@
   (evil-define-key 'normal 'global (kbd "<leader>pr") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader>pR") 'deadgrep)
   (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-fd)
+  (evil-define-key 'visual 'global-map (kbd "<leader>;") 'comment-line)
   (evil-define-key 'normal 'global (kbd "<leader>;") 'comment-line)
   (evil-define-key 'normal 'global (kbd "<leader>ca") 'eglot-code-actions)
   (evil-define-key 'normal 'global (kbd "<leader>ch") 'display-local-help)
